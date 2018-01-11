@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VouchersAPI2017", "VouchersAPI2017\VouchersAPI2017.csproj", "{56ED1668-7A5C-4563-BF08-F78EDDA49C54}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56ED1668-7A5C-4563-BF08-F78EDDA49C54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56ED1668-7A5C-4563-BF08-F78EDDA49C54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56ED1668-7A5C-4563-BF08-F78EDDA49C54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56ED1668-7A5C-4563-BF08-F78EDDA49C54}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72015965-19BB-4FE1-A392-AE2EB2FE86E5}
+	EndGlobalSection
+EndGlobal
