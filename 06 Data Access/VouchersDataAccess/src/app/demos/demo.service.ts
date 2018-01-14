@@ -37,7 +37,6 @@ export class DemoService {
         for (let i=0; i < 10; i++) {            
             let mi: MediaItem = { title: "Movie " + i, startTime: new Date(t0.setSeconds(t0.getSeconds()+20)) };
             this.media.push(mi);
-        }
-        console.log("Media",this.media)
+        }        
     }
 }
