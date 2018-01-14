@@ -1,9 +1,10 @@
 import { Http } from "@angular/http";
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/filter";
+import { Voucher } from "../../shared/index";
 
 
 @Component({
@@ -20,7 +21,7 @@ export class HttpClientsComponent implements OnInit {
 
   getVouchers() {
     this.httpClient
-      .get("http://localhost:5000/api/vouchers")
+      .get<Voucher[]>("http://localhost:5000/api/vouchers")
       .subscribe(data => {
         this.result = data;
       });
@@ -61,11 +62,20 @@ export class HttpClientsComponent implements OnInit {
         observe: "response"
       })
       .toPromise()
-      .then(response => {
-        console.log('Response using {observe: "response"}: ',response);
-        this.result = response;
+      .then(data => {
+        console.log('Response using {observe: "response"}: ',data);
+        this.result = data;
       });
 
-      // var headers = new HttpHeaders();
+    var headers = new HttpHeaders();
+    headers.set("Content-Type", "text/html; charset=utf-8")
+
+    this.httpClient
+      .get("http://localhost:5000/api/vouchers", {headers})
+      .toPromise()
+      .then(data => {
+        console.log('Response using headers variable: ',data);
+        this.result = data;
+      });
   }
 }
