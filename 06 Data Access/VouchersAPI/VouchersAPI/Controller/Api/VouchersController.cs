@@ -107,7 +107,7 @@ namespace Vouchers.Api
             VoucherViewModel model = rep.GetVoucher(Id);
             return model;
         }
-        
+
         //Save implemented as one method
         // POST: http://localhost:PORT/api/vouchers/save
         [HttpPost]
@@ -123,6 +123,26 @@ namespace Vouchers.Api
                 //Update using attach and entity state pattern
                 ctx.Vouchers.Attach(value);
                 ctx.Entry(value).State = EntityState.Modified;
+
+                if (value.Details != null)
+                {
+                    foreach (VoucherDetail vd in value.Details)
+                    {
+                        switch (ctx.Entry(vd).State)
+                        {
+                            case EntityState.Added:
+                                ctx.VoucherDetails.Add(vd);
+                                break;
+                            case EntityState.Deleted:
+                                ctx.VoucherDetails.Remove(vd);
+                                break;
+                            default:
+                                ctx.VoucherDetails.Attach(vd);
+                                ctx.Entry(vd).State = EntityState.Modified;
+                                break;
+                        }
+                    }
+                }
             }
             ctx.SaveChanges();
             return value.ID;

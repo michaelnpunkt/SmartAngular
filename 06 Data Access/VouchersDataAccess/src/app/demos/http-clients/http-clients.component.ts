@@ -42,6 +42,7 @@ export class HttpClientsComponent implements OnInit {
       .post("http://localhost:5000/api/vouchers", voucher)
       .subscribe(data => {
         this.result = data;
+        console.log("Insert using HttpClient")
       });
   }
 
@@ -52,6 +53,7 @@ export class HttpClientsComponent implements OnInit {
       .map(response => response.json())
       .subscribe(data => {
         this.result = data;
+        console.log("Insert using http")
       });
   } 
 
@@ -74,7 +76,7 @@ export class HttpClientsComponent implements OnInit {
       .get("http://localhost:5000/api/vouchers", {headers})
       .toPromise()
       .then(data => {
-        console.log('Response using headers variable: ',data);
+        console.log('Response using headers variable: ', data);
         this.result = data;
       });
   }
