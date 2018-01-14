@@ -83,7 +83,7 @@ export class PromiseComponent implements OnInit {
   }
 
   getSumHttp(){
-    this.http.get('http://localhost:5000/api/vouchers/getsum/true',)
+    this.httpClient.get('http://localhost:5000/api/vouchers/getsum/true',)
     .toPromise()
     .then((response)=>{
       this.resultB = response});      

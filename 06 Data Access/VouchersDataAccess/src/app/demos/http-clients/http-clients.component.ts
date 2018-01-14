@@ -33,10 +33,17 @@ export class HttpClientsComponent implements OnInit {
       })
     }
 
-    getVouchersFilter(){    
-      this.http.get('http://localhost:5000/api/vouchers')
-        .map(response => response.json())
-        .filter(data => data.json().deleted == false)        
+    insertVoucher(){
+      var voucher = { Text: "Inserted by Angular HttpClient", Date: new Date() };
+      this.httpClient.post('http://localhost:5000/api/vouchers', voucher).subscribe((data)=>{
+        this.result = data;
+      })
+    }
+
+    insertVoucherHttp(){
+      var voucher = { Text: "Inserted by Angular Http", Date: new Date() };
+      this.http.post('http://localhost:5000/api/vouchers', voucher)
+        .map(response => response.json())        
         .subscribe((data)=>{
         this.result = data;
       })

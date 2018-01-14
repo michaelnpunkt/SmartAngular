@@ -5,31 +5,6 @@
 <div class="section">
   <div class='row'>
     <div class='col-xs-3'>
-      <h4>Currently playing:</h4><br>      
-    </div>
-    <div class='col-xs-9' style='vertical-align: top'>
-        <ul>
-            <li  *ngFor="let mi of current | async">{{mi.title}}, Start Time: {{mi.startTime | date : "mediumTime"}}</li>
-        </ul> 
-    </div>    
-  </div>
-  
-  <div class='row'>
-    <div class='col-xs-3'>
-      <h4>Available Soon</h4><br>      
-    </div>
-    <div class='col-xs-9' style='vertical-align: top'>
-        <ul>
-            <li  *ngFor="let mi of upcoming | async">{{mi.title}}, Start Time: {{mi.startTime | date : "mediumTime"}}</li>
-        </ul> 
-    </div>   
-  </div>
-  </div>
-
-
-<div class="section">
-  <div class='row'>
-    <div class='col-xs-3'>
       <h4>Voucher</h4><br>
       <a (click)="getVouchers()">Get Vouchers</a><br />
       <a (click)="getVoucher()">Get Voucher</a><br />
@@ -62,8 +37,8 @@
 <div class="section">
   <div class='row'>
     <div class='col-xs-3'>
-      <h4>Voucher Details</h4><br>
-      <a>Get Voucher Details</a><br />
+      <h4>Observalbe Patterns</h4><br>
+      <a (click)="getVouchersFilter()">Get Vouchers Filter</a><br />
       <a>Get Voucher Detail</a><br />
       <a>Insert Voucher Detail</a><br />
       <a>Update Voucher Detail</a><br />
@@ -75,3 +50,27 @@
     </div>
   </div>    
 </div>
+
+<div class="section">
+  <div class='row'>
+    <div class='col-xs-3'>
+      <h4>Currently playing:</h4><br>      
+    </div>
+    <div class='col-xs-9' style='vertical-align: top'>
+        <ul>
+            <li  *ngFor="let mi of current | async">{{mi.title}}, Start Time: {{mi.startTime | date : "mediumTime"}}</li>
+        </ul> 
+    </div>    
+  </div>
+  
+  <div class='row'>
+    <div class='col-xs-3'>
+      <h4>Available Soon</h4><br>      
+    </div>
+    <div class='col-xs-9' style='vertical-align: top'>
+        <ul>
+            <li  *ngFor="let mi of upcoming | async">{{mi.title}}, Start Time: {{mi.startTime | date : "mediumTime"}}</li>
+        </ul> 
+    </div>   
+  </div>
+  </div>

@@ -94,4 +94,14 @@ export class ObservablesComponent implements OnInit {
         this.resultB = data;
         })
       }
+
+      getVouchersFilter(){    
+        this.http.get('http://localhost:5000/api/vouchers')
+          .map(response => response.json())
+          .filter(data => data.json().deleted == false)        
+          .subscribe((data)=>{
+          this.result = data;
+        })
+      }
+
     }
