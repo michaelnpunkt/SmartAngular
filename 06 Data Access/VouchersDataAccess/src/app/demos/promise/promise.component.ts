@@ -89,16 +89,6 @@ export class PromiseComponent implements OnInit {
       this.resultB = response});      
   }
 
-  //Uncomment / Comment getSum() -> Try only with observe: 'response', watch body -> try full options
-
-  // getSum(){        
-  //   this.httpClient.get('http://localhost:5000/api/vouchers/getsum/true', {responseType: 'text', observe: 'response'})
-  //   .toPromise()
-  //   .then((response)=>{
-  //     console.log(response);
-  //     this.resultB = response});      
-  // }
-
   getVM(){
     this.httpClient.get('http://localhost:5000/api/vouchers/getvm/1')
     .toPromise()

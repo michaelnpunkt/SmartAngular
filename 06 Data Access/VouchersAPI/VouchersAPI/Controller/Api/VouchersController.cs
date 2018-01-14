@@ -36,24 +36,43 @@ namespace Vouchers.Api
         [HttpPost]
         public void Post([FromBody]Voucher value)
         {
-            foreach (VoucherDetail vd in value.Details)
+            if (value.Details != null)
             {
-                vd.Account = null;
+                foreach (VoucherDetail vd in value.Details)
+                {
+                    vd.Account = null;
+                }
             }
             ctx.Vouchers.Add(value);
             ctx.SaveChanges();
         }
 
-        [HttpPut()]        
+        [HttpPut()]
         public void Put([FromBody]Voucher value) //Classic .NET Core WebApi pattern: public void Put(int id, [FromBody]Voucher value)
         {
             ctx.Vouchers.Attach(value);
             ctx.Entry(value).State = EntityState.Modified;
-            foreach (VoucherDetail vd in value.Details)
+
+            if (value.Details != null)
             {
-                ctx.VoucherDetails.Attach(vd);
-                ctx.Entry(vd).State = EntityState.Modified;
+                foreach (VoucherDetail vd in value.Details)
+                {
+                     switch (ctx.Entry(vd).State)
+                    {
+                        case EntityState.Added:
+                            ctx.VoucherDetails.Add(vd);
+                            break;
+                        case EntityState.Deleted:
+                            ctx.VoucherDetails.Remove(vd);
+                            break;
+                        default:
+                            ctx.VoucherDetails.Attach(vd);
+                            ctx.Entry(vd).State = EntityState.Modified;
+                            break;
+                    }
+                }
             }
+
             ctx.SaveChanges();
         }
         
