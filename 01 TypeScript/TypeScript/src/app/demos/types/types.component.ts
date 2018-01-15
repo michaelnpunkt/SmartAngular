@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import * as moment from "moment";
+import * as $ from "jquery";
 
 @Component({
   selector: "app-types",
@@ -143,6 +144,16 @@ export class TypesComponent implements OnInit {
 
     if (n === VoucherStatus.complete) {
     }
+  }
+
+  useTypings() {
+    //using moment
+    let dt = new Date();
+    console.log("Using time format: ", moment(dt).format("LTS"));
+
+    //using jQuery
+    let myArray = ["Angular", "React", "SPFx"];
+    console.log("myArray is an Array: ", $.isArray(myArray));
   }
 
   introArrays() {
@@ -306,7 +317,6 @@ export class TypesComponent implements OnInit {
   }
 
   spreadOperator() {
-    
     console.log(Math.max(3, 5, 1)); // 5
 
     let arr = [3, 5, 1];
