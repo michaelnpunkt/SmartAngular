@@ -58,10 +58,11 @@ export class ObservablesComponent implements OnInit {
 
   insertVoucher() {
     var voucher = { Text: "Inserted by Angular", Date: new Date() };
+    console.log("Voucher to insert: ", voucher)
     this.httpClient
       .post("http://localhost:5000/api/vouchers", voucher)
       .subscribe(data => {
-        this.result = data;
+        if (data == null) this.result = "Voucher inserted";
       });
   }
 
@@ -73,12 +74,11 @@ export class ObservablesComponent implements OnInit {
       .subscribe(data => {
         let voucher: Voucher = <Voucher>data;
         voucher.Text = "Updated by Angular";
-
+        console.log("Voucher to update: ", voucher)
         this.httpClient
           .put("http://localhost:5000/api/vouchers", voucher)
           .subscribe(data => {
-            console.log("voucher updated", voucher);
-            this.result = data;
+            this.result ="voucher updated";
           });
       });
   }
@@ -87,16 +87,17 @@ export class ObservablesComponent implements OnInit {
     var id = 1002;
     var url = "http://localhost:5000/api/vouchers/" + id;
     this.httpClient.delete(url).subscribe(data => {
-      console.log("voucher deleted");
-      this.result = data;
+      this.result = `voucher with id ${id} deleted`;
+      console.log(this.result);
     });
   }
 
   getSum() {
-    this.httpClient
+     this.http
       .get("http://localhost:5000/api/vouchers/getsum/true")
-      .subscribe(data => {
-        this.resultB = data;
+      .subscribe(response => {
+        this.resultB = response;
+        console.log("getSum()", this.resultB);
       });
   }
 
@@ -119,20 +120,20 @@ export class ObservablesComponent implements OnInit {
       Remark: true
     };
 
+    console.log("Saving voucher ", voucher)
     this.httpClient
       .post("http://localhost:5000/api/vouchers/save", voucher)
       .subscribe(data => {
-        this.resultB = data;
+        response => (this.resultB = `Voucher with id ${response} was saved`)
       });
   }
 
   getVouchersFilter() {
-    this.http
+    this.httpClient
       .get("http://localhost:5000/api/vouchers")
-      .map(response => response.json())
-      .filter(data => data.json().deleted == false)
+      .filter(<Voucher>(v) => v.Text == "Inserted by Angular")
       .subscribe(data => {
-        this.result = data;
+        this.resultC = data;
       });
   }
 }

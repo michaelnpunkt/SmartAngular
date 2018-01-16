@@ -10,12 +10,12 @@ export class VouchersService {
 
     vouchers = null;
 
-    getVouchers() : Observable<any> {
-        return this.httpClient.get('http://localhost:5000/api/vouchers');          
+    getVouchers() : Observable<Voucher[]> {
+        return this.httpClient.get<Voucher[]>('http://localhost:5000/api/vouchers');          
     }
     
     getVoucher(id: number) : Observable<any> {
-        return this.httpClient.get('http://localhost:5000/api/vouchers/getvm/' + id);
+        return this.httpClient.get<Voucher>('http://localhost:5000/api/vouchers/getvm/' + id);
       }
 
     insertVoucher(voucher: Voucher) : void {                

@@ -41,21 +41,9 @@ export class HttpClientsComponent implements OnInit {
     this.httpClient
       .post("http://localhost:5000/api/vouchers", voucher)
       .subscribe(data => {
-        this.result = data;
-        console.log("Insert using HttpClient")
+        this.result = "Insert using HttpClient";
       });
   }
-
-  insertVoucherHttp() {
-    var voucher = { Text: "Inserted by Angular Http", Date: new Date() };
-    this.http
-      .post("http://localhost:5000/api/vouchers", voucher)
-      .map(response => response.json())
-      .subscribe(data => {
-        this.result = data;
-        console.log("Insert using http")
-      });
-  } 
 
   usingHeadersHttpClient() {
 
