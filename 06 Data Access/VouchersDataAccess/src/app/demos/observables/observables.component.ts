@@ -8,44 +8,102 @@ import { VouchersService } from "../../vouchers/voucher.service";
 import * as moment from 'moment';
 import { Observable } from "rxjs/Observable";
 import { Observer, Subscription } from "rxjs";
+import { OnDestroy } from "@angular/core/src/metadata/lifecycle_hooks";
 
 
+enum CurrentView{
+  CreateObservableItem,
+  CreateObservableArray,
+  Filter,
+  Stream
+}
 
 @Component({
   selector: "app-observables",
   templateUrl: "./observables.component.html",
   styleUrls: ["./observables.component.css"]
 })
-export class ObservablesComponent implements OnInit {
+export class ObservablesComponent implements OnInit, OnDestroy {
 
   media: Observable<MediaItem[]>;
   current: Observable<MediaItem[]>;
   upcoming: Observable<MediaItem[]>;
 
-  mediaObsSubscritpion: Subscription;
-
   currentView: CurrentView;
   view = CurrentView;
-  
+
+  mediaObservable: Observable<MediaItem>
+  mediaObservableArray: Observable<MediaItem[]>
+  mediaItems: MediaItem[];
+    
   constructor(
     private httpClient: HttpClient,
     private http: Http,
     private vs: VouchersService,
     private ds: DemoService
-  ) {
-    const mediaObservable = Observable.create((observer: Observer<MediaItem>)=>{
-      setTimeout(()=>{
-        observer.next({ title: "Movie starting at " + moment().format('h:mm:ss a'), startTime: new Date()})
-      }, 100)
-
-      this.mediaObsSubscritpion = mediaObservable.subscribe((data)=>console.log(data))
-    })
-  }
-
-
+  ) { }
 
   ngOnInit() {
-    this.currentView = CurrentView.Filter;
+    this.currentView = CurrentView.CreateObservableItem;
+  }
+
+  ngOnDestroy(): void {
+    throw new Error("Method not implemented.");
+  }
+
+  createMediaItemObservable(){
+    this.currentView = CurrentView.CreateObservableItem;   
+
+    this.mediaObservable = Observable.create((observer: Observer<MediaItem>) => {
+      setTimeout(() => {
+        observer.next(<MediaItem>{title: `Media created at: ${moment().format("h:mm:ss a")}`});
+      }, 0);
+      setTimeout(() => {
+        observer.next(<MediaItem>{title: `Media created at: ${moment().format("h:mm:ss a")}`});
+      }, 2000);
+      setTimeout(() => {
+        observer.next(<MediaItem>{title: `Media created at: ${moment().format("h:mm:ss a")}`});
+      }, 4000);
+      setTimeout(() => {
+        // observer.error('this does not work');
+        observer.complete();
+      }, 5000);
+      setTimeout(() => {
+        observer.next(<MediaItem>{title: `Media created at: ${moment().format("h:mm:ss a")}`});
+      }, 6000);
+    });
+
+    let mediaObsSubscritpion: Subscription = this.mediaObservable.subscribe(
+      (data: MediaItem) => { console.log("Media created: ", data); },
+      (error: string) => { console.log(error); },
+      () => { console.log('completed'); }
+    );
+  }
+
+  createMediaItemArrayObservable(){
+
+    const mediaArray: MediaItem[] = []
+
+    this.currentView = CurrentView.CreateObservableArray;   
+
+    this.mediaObservableArray = Observable.create((observer: Observer<MediaItem[]>) => {
+      setTimeout(() => {
+        mediaArray.push(<MediaItem>{title: `Media created at: ${moment().format("h:mm:ss a")}`})
+        observer.next(mediaArray);
+      }, 0);
+      setTimeout(() => {
+        mediaArray.push(<MediaItem>{title: `Media created at: ${moment().format("h:mm:ss a")}`})
+        observer.next(mediaArray);
+      }, 2000);
+      setTimeout(() => {
+        mediaArray.push(<MediaItem>{title: `Media created at: ${moment().format("h:mm:ss a")}`})
+        observer.next(mediaArray);
+      }, 4000);
+    });
+
+    this.mediaObservableArray.subscribe((data)=>{
+      this.mediaItems = data;
+    })
   }
 
   useFilter() {
@@ -68,10 +126,4 @@ export class ObservablesComponent implements OnInit {
 
     
   }
-
-}
-
-enum CurrentView{
-  Filter,
-  Stream
 }

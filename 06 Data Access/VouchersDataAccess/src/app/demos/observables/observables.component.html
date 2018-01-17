@@ -1,16 +1,37 @@
 <div class="section">
-  <h4>Make sure API is running: VouchersAPI -> src folder -> dotnet watch run</h4><br>
+  <h4>Make sure API is running: VouchersAPI -> src folder -> dotnet watch run</h4>
+  <br>
 </div>
 
 <div class="section">
+    <div class='row'>
+      <div class='col-xs-5'>
+        <h4>Using Observables</h4><br>
+        <a (click)="createMediaItemObservable()">Get Media Observable</a><br />
+        <a (click)="createMediaItemArrayObservable()">Get Media Array Observable - Simulate Stream</a><br />
+        <a (click)="useFilter()">Use Filter</a><br />        
+      </div>
+    </div>    
+  </div>
+
+<div class="section">
   <div [ngSwitch]="currentView">
+    <div *ngSwitchCase="view.CreateObservableItem">
+      See console for output<br>
+      {{ (mediaObservable | async)?.title}}
+    </div>
+    <div *ngSwitchCase="view.CreateObservableArray">
+        <ul>
+          <li *ngFor="let mi of mediaItems">{{mi.title}}</li>
+        </ul>
+    </div>
     <div *ngSwitchCase="view.Filter">
       <div class='row'>
-        <div class='col-xs-3'>
+        <div class='col-xs-5'>
           <h4>Currently playing:</h4>
           <br>
         </div>
-        <div class='col-xs-9' style='vertical-align: top'>
+        <div class='col-xs-7' style='vertical-align: top'>
           <ul>
             <li *ngFor="let mi of current | async">{{mi.title}}, Start Time: {{mi.startTime | date : "mediumTime"}}</li>
           </ul>
@@ -18,11 +39,11 @@
       </div>
 
       <div class='row'>
-        <div class='col-xs-3'>
+        <div class='col-xs-5'>
           <h4>Available Soon</h4>
           <br>
         </div>
-        <div class='col-xs-9' style='vertical-align: top'>
+        <div class='col-xs-7' style='vertical-align: top'>
           <ul>
             <li *ngFor="let mi of upcoming | async">{{mi.title}}, Start Time: {{mi.startTime | date : "mediumTime"}}</li>
           </ul>
