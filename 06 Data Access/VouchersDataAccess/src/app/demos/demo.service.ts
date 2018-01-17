@@ -11,12 +11,17 @@ import { Observer } from 'rxjs/Observer';
 import * as moment from 'moment';
 
 @Injectable()
-export class DemoService{
+export class DemoService {
   private items: DemoItem[];
-  private media: MediaItem[] = null;  
+
+  //created manually
+  private media: MediaItem[] = null;
+
+  //returned as stream
+  private mediaArray: MediaItem[] = [];
 
   constructor(private httpClient: HttpClient) {
-    this.buildMedia();   
+    this.buildMedia();
   }
 
   getItems(): Promise<any> {
@@ -43,37 +48,33 @@ export class DemoService{
     }
   }
 
+  private buildStream() {}
+
   getMediaStream(): Observable<MediaItem[]> {
-      
-      const label = "Media created at:"
-      const mediaArray: MediaItem[] = []
+    const ct: number = 10;
+    const label = "Media created at:";
 
-      let mediaObservableArray: Observable<MediaItem[]> = Observable.create((observer: Observer<MediaItem[]>) => {
-      setTimeout(() => {
-        mediaArray.push(<MediaItem>{title: `${label} ${moment().format("h:mm:ss a")}`})
-        observer.next(mediaArray);
-      }, 0);
-      setTimeout(() => {
-        mediaArray.push(<MediaItem>{title: `${label} ${moment().format("h:mm:ss a")}`})
-        observer.next(mediaArray);
-      }, 2000);
-      setTimeout(() => {
-        mediaArray.push(<MediaItem>{title: `${label} ${moment().format("h:mm:ss a")}`})
-        observer.next(mediaArray);
-      }, 4000);
-      setTimeout(() => {
-        // observer.error('this does not work');
-        observer.complete();
-      }, 5000);
-      setTimeout(() => {
-        mediaArray.push(<MediaItem>{title: `${label} ${moment().format("h:mm:ss a")}`})
-        observer.next(mediaArray);
-      }, 6000);
-
-    });
-
+    let mediaObservableArray: Observable<MediaItem[]> = Observable.create(
+      (observer: Observer<MediaItem[]>) => {
+        for (let i = 0; i < ct; i++) {
+          this.addItem(i,observer,label)
+        }
+        setTimeout(() => {
+          // observer.error('this does not work');
+          observer.complete();
+          console.log("Oberver: Complete")
+        }, (ct + 1) * 1000);
+        this.addItem(12,observer,label)
+      }
+    );
     return mediaObservableArray;
   }
-
+  private addItem(ct:number, observer: Observer<MediaItem[]>, label):void{
+    setTimeout(() => {
+      this.mediaArray.push(<MediaItem>{
+        title: `${label} ${moment().format("h:mm:ss a")}`
+      });
+      observer.next(this.mediaArray);
+    }, (ct + 2) * 1000);
+  }
 }
-
