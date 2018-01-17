@@ -36,24 +36,43 @@ namespace Vouchers.Api
         [HttpPost]
         public void Post([FromBody]Voucher value)
         {
-            foreach (VoucherDetail vd in value.Details)
+            if (value.Details != null)
             {
-                vd.Account = null;
+                foreach (VoucherDetail vd in value.Details)
+                {
+                    vd.Account = null;
+                }
             }
             ctx.Vouchers.Add(value);
             ctx.SaveChanges();
         }
 
-        [HttpPut()]        
+        [HttpPut()]
         public void Put([FromBody]Voucher value) //Classic .NET Core WebApi pattern: public void Put(int id, [FromBody]Voucher value)
         {
             ctx.Vouchers.Attach(value);
             ctx.Entry(value).State = EntityState.Modified;
-            foreach (VoucherDetail vd in value.Details)
+
+            if (value.Details != null)
             {
-                ctx.VoucherDetails.Attach(vd);
-                ctx.Entry(vd).State = EntityState.Modified;
+                foreach (VoucherDetail vd in value.Details)
+                {
+                     switch (ctx.Entry(vd).State)
+                    {
+                        case EntityState.Added:
+                            ctx.VoucherDetails.Add(vd);
+                            break;
+                        case EntityState.Deleted:
+                            ctx.VoucherDetails.Remove(vd);
+                            break;
+                        default:
+                            ctx.VoucherDetails.Attach(vd);
+                            ctx.Entry(vd).State = EntityState.Modified;
+                            break;
+                    }
+                }
             }
+
             ctx.SaveChanges();
         }
         
@@ -77,7 +96,7 @@ namespace Vouchers.Api
             string result = expenses ? "Total Expenses: " : "Total Income: ";
             var accts = ctx.BalanceAccounts.Where(f => f.Expense == expenses).Select(f => f.ID).ToList();
             var vds = ctx.VoucherDetails.Where(f => f.Account != null && accts.Contains(f.AccountID)).Sum(f => f.Amount);
-            return result + vds.ToString();
+            return result + vds;
         }
 
         // GET: http://localhost:PORT/api/vouchers/getvm/1
@@ -88,7 +107,7 @@ namespace Vouchers.Api
             VoucherViewModel model = rep.GetVoucher(Id);
             return model;
         }
-        
+
         //Save implemented as one method
         // POST: http://localhost:PORT/api/vouchers/save
         [HttpPost]
@@ -104,6 +123,26 @@ namespace Vouchers.Api
                 //Update using attach and entity state pattern
                 ctx.Vouchers.Attach(value);
                 ctx.Entry(value).State = EntityState.Modified;
+
+                if (value.Details != null)
+                {
+                    foreach (VoucherDetail vd in value.Details)
+                    {
+                        switch (ctx.Entry(vd).State)
+                        {
+                            case EntityState.Added:
+                                ctx.VoucherDetails.Add(vd);
+                                break;
+                            case EntityState.Deleted:
+                                ctx.VoucherDetails.Remove(vd);
+                                break;
+                            default:
+                                ctx.VoucherDetails.Attach(vd);
+                                ctx.Entry(vd).State = EntityState.Modified;
+                                break;
+                        }
+                    }
+                }
             }
             ctx.SaveChanges();
             return value.ID;
