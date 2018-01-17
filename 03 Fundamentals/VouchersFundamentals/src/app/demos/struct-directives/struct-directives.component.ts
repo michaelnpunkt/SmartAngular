@@ -21,7 +21,7 @@ export class StructDirectivesComponent implements OnInit {
 
   showDivOne: boolean = true;
   
-  currentDirection = DirectionEnum.East
+  currentDirection: DirectionEnum = DirectionEnum.East
   direction = DirectionEnum; 
     
   constructor(private router: Router, private vs: VouchersService) {

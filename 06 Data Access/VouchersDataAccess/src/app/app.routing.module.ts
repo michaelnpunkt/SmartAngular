@@ -11,15 +11,17 @@ import { NgModule, ViewChild } from '@angular/core';
 import { AdminComponent } from './admin/admin.component';
 import { RouteGuard } from './route.guard.service';
 import { DeepNestingComponent } from './demos/deep-nesting/deep-nesting.component';
+import { ObservableCrudComponent } from './demos/observable-crud/observable-crud.component';
 
 const appRoutes: Routes = [
     { path: '',
       component: DemosComponent,
       children: [
-        { path: 'promise', component: PromiseComponent },
         { path: 'clients', component: HttpClientsComponent },
-        { path: 'observables', component: ObservablesComponent },
+        { path: 'promise', component: PromiseComponent },        
         { path: 'nosql', component: NoSQLInterceptorComponent },
+        { path: 'observables', component: ObservablesComponent },
+        { path: 'observablescurd', component: ObservableCrudComponent },        
         { path: 'deepnesting', component: DeepNestingComponent }
       ]
     },

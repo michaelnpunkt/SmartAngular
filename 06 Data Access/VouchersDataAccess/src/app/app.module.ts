@@ -26,10 +26,10 @@ import { BsDatepickerModule } from 'ngx-bootstrap';
 import { AdminComponent } from './admin/admin.component';
 import { FirebaseService } from './demos/firebase.service';
 import { HTTP_INTERCEPTORS }from '@angular/common/http';
+import { ObservableCrudComponent } from './demos/observable-crud/observable-crud.component';
 
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
-
 registerLocaleData(localeDe)
 
 @NgModule({
@@ -48,7 +48,8 @@ registerLocaleData(localeDe)
     MatchHeightDirective,
     NoSQLInterceptorComponent,
     AdminComponent,
-    DeepNestingComponent
+    DeepNestingComponent,
+    ObservableCrudComponent
   ],
   imports: [
     FormsModule,

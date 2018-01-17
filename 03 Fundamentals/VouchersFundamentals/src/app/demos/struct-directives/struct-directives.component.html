@@ -1,20 +1,22 @@
 <div class="section">
     <h4>Table</h4>
     <table class="table">
-      <thead>
-          <tr>
-            <th>ID</th>
-            <th>Text</th>
-            <th></th>
-          </tr>
-      </thead>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Text</th>
+                <th></th>
+            </tr>
+        </thead>
         <tbody>
-          <tr *ngFor="let v of vouchers" (click)="showVoucher(v.ID)">
-            <td>{{v.ID}}</td>
-            <td>{{v.Text}}</td>
-            <td><a [routerLink]="[ '/vouchers', v.ID ]">Edit</a></td>
-          </tr>    
-    </tbody>
+            <tr *ngFor="let v of vouchers" (click)="showVoucher(v.ID)">
+                <td>{{v.ID}}</td>
+                <td>{{v.Text}}</td>
+                <td>
+                    <a [routerLink]="[ '/vouchers', v.ID ]">Edit</a>
+                </td>
+            </tr>
+        </tbody>
     </table>
 </div>
 
@@ -27,15 +29,16 @@
 
 <div class="section">
     <h4>@If ... [else]</h4>
-    <input type="checkbox" [(ngModel)]="showDivOne"> <label>Please check to change value for "showDivOne":</label><br/>
-    Current value for "showDivOne": {{showDivOne}}
+    <input type="checkbox" [(ngModel)]="showDivOne">
+    <label>Please check to change value for "showDivOne":</label>
+    <br/> Current value for "showDivOne": {{showDivOne}}
     <div *ngIf="showDivOne; else falsyTemplate">
         <h5>Div 1</h5>
-      </div>
-       
-      <ng-template #falsyTemplate>
+    </div>
+
+    <ng-template #falsyTemplate>
         <h5>Not Div 1</h5>
-      </ng-template>
+    </ng-template>
 </div>
 
 <div class="section">
@@ -47,5 +50,5 @@
         <b *ngSwitchCase="direction.North">Going North Direction ...</b>
         <b *ngSwitchCase="direction.South">Going South Direction ...</b>
         <b *ngSwitchDefault>No Direction</b>
-      </div> 
+    </div>
 </div>
