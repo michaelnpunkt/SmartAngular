@@ -14,6 +14,7 @@ enum CurrentView{
   CreateObservableItem,
   CreateObservableArray,
   Filter,
+  FilterReactive,
   GetObservablesFromService
 }
 
@@ -28,13 +29,16 @@ export class ObservablesComponent implements OnInit, OnDestroy {
   current: Observable<MediaItem[]>;
   upcoming: Observable<MediaItem[]>;
 
+  playingLocal: MediaItem[];
+  upcomingLocal: MediaItem[];
+
   currentView: CurrentView;
   view = CurrentView;
 
   mediaObservable: Observable<MediaItem>
-  mediaObsSubscritpion: Subscription;
+  mediaSingletonObs: Subscription;
 
-  mediaObservableArray: Observable<MediaItem[]>
+  mediaArrayObs: Observable<MediaItem[]>
   mediaItems: MediaItem[];
     
   constructor(
@@ -63,7 +67,7 @@ export class ObservablesComponent implements OnInit, OnDestroy {
       }, 1000);
     });
 
-    this.mediaObsSubscritpion = this.mediaObservable.subscribe(
+    this.mediaSingletonObs = this.mediaObservable.subscribe(
       (data: MediaItem) => { console.log("Media created: ", data); },
       (error: string) => { console.log(error); },
       () => { console.log('completed'); }
@@ -72,8 +76,8 @@ export class ObservablesComponent implements OnInit, OnDestroy {
   }
 
   unsubscribeMediaItem(){
-    this.mediaObsSubscritpion.unsubscribe();
-    console.log("unsbscribed")
+    this.mediaSingletonObs.unsubscribe();
+    console.log("unsbscribed mediaObsSubscritption")
   }
 
   createMediaItemArrayObservable(){
@@ -82,7 +86,7 @@ export class ObservablesComponent implements OnInit, OnDestroy {
     const mediaArray: MediaItem[] = []
     this.currentView = CurrentView.CreateObservableArray;   
 
-    this.mediaObservableArray = Observable.create((observer: Observer<MediaItem[]>) => {
+    this.mediaArrayObs = Observable.create((observer: Observer<MediaItem[]>) => {
       setTimeout(() => {
         mediaArray.push(<MediaItem>{title: `${label} ${moment().format("h:mm:ss a")}`})
         observer.next(mediaArray);
@@ -106,20 +110,24 @@ export class ObservablesComponent implements OnInit, OnDestroy {
 
     });
 
-    this.mediaObservableArray.subscribe((data)=>{
+    this.mediaArrayObs.subscribe((data)=>{
       this.mediaItems = data;
     })
   }
 
   createMediaItemArrayService(){
+
     this.currentView = CurrentView.GetObservablesFromService;
-      this.ds.getMediaStream().subscribe(data=>this.mediaItems = data);
+    this.ds.getMediaStream().subscribe(data=>this.mediaItems = data);
+
   }
 
   useFilter() {
+
     this.currentView = CurrentView.Filter;
 
     this.media = this.ds.getMedia();
+
     let dt = new Date();
     this.current = this.media.map(mis =>
       mis.filter(mi => mi.startTime < new Date())
@@ -129,11 +137,65 @@ export class ObservablesComponent implements OnInit, OnDestroy {
     );
   }
 
-  consumeStream(){
-    // this.currentView = CurrentView.Stream;
+  useFilterReactive(){
+    debugger;
 
-    // this.ds.getMediaStream().subscribe(data=>this.media = data);
+    this.currentView = CurrentView.Filter;
 
+    this.media = this.ds.getMedia();
+    this.media.subscribe(data=>{
+
+      let dt = new Date();
+      this.current = this.media.map(mis =>
+        mis.filter(mi => mi.startTime < new Date())
+      );
+      this.upcoming = this.media.map(mis =>
+        mis.filter(mi => mi.startTime >= new Date())
+      );
+
+    })    
+  }
+
+  useFilterReactive$(){
+    debugger;
     
+    this.currentView = CurrentView.Filter;
+
+    // 
+    const media$ = this.ds.getMediaStream();
+    media$.subscribe(data=>{
+
+      console.log("data changed", data)
+      // let dt = new Date();
+      // this.playingLocal = data.filter((item:MediaItem)=>{
+      //   item.startTime < dt;
+      // })
+      // this.upcomingLocal = data.filter((item:MediaItem)=>{
+      //   item.startTime >= dt;
+      // })
+
+      // let dt = new Date();
+      // this.current = this.media.map(mis =>
+      //   mis.filter(mi => mi.startTime < new Date())
+      // );
+      // this.upcoming = this.media.map(mis =>
+      //   mis.filter(mi => mi.startTime >= new Date())
+      // );
+
+    })   
+
+
+
+    this.ds.getMediaStream().subscribe(data =>{
+
+      let dt = new Date();
+      this.current = this.media.map(mis =>
+        mis.filter(mi => mi.startTime < new Date())
+      );
+      this.upcoming = this.media.map(mis =>
+        mis.filter(mi => mi.startTime >= new Date())
+      );
+
+    })    
   }
 }

@@ -1,5 +1,5 @@
 <div class="section">
-  <h4>Make sure API is running: VouchersAPI -> src folder -> dotnet watch run</h4>
+  <h4>Works with pure Mock Data</h4>
   <br>
 </div>
 
@@ -11,6 +11,8 @@
         <a (click)="createMediaItemArrayObservable()">Get Media Array Observable - Simulate Stream</a><br />
         <a (click)="createMediaItemArrayService()">Get Media Array Observable from Service</a><br />
         <a (click)="useFilter()">Use Filter</a><br />        
+        <a (click)="useFilterReactive()">Use Filter Reactive</a><br />      
+        <a (click)="useFilterReactive$()">Use Filter Reactive Stream</a><br />
       </div>
     </div>    
   </div>
@@ -18,7 +20,7 @@
 <div class="section">
   <div [ngSwitch]="currentView">
     <div *ngSwitchCase="view.CreateObservableItem">
-        See console for output - {{ (mediaObservable | async)?.title}}
+        See console for output <br/>{{ (mediaObservable | async)?.title}}
     </div>
     <div *ngSwitchCase="view.CreateObservableArray">
         <ul>
@@ -50,12 +52,38 @@
         </div>
       </div>
     </div>
+    <div *ngSwitchCase="view.FilterReactive">
+        <div class='row'>
+          <div class='col-xs-5'>
+            <h4>Currently playing:</h4>
+            <br>
+          </div>
+          <div class='col-xs-7' style='vertical-align: top'>
+            <ul>
+              <li *ngFor="let mi of playingLocal | async">{{mi.title}}, Start Time: {{mi.startTime | date : "mediumTime"}}</li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class='row'>
+          <div class='col-xs-5'>
+            <h4>Available Soon</h4>
+            <br>
+          </div>
+          <div class='col-xs-7' style='vertical-align: top'>
+            <ul>
+              <li *ngFor="let mi of upcomingLocal | async">{{mi.title}}, Start Time: {{mi.startTime | date : "mediumTime"}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     <div *ngSwitchCase="view.GetObservablesFromService">
       <ul>
         <li *ngFor="let m of mediaItems">{{m.title}}</li>
       </ul>
     </div>
   </div>
+  
 
 
 </div>

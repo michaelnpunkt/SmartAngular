@@ -21,7 +21,7 @@ export class DemoService {
   private mediaArray: MediaItem[] = [];
 
   constructor(private httpClient: HttpClient) {
-    this.buildMedia();
+    // this.buildMedia();
   }
 
   getItems(): Promise<any> {
@@ -51,6 +51,8 @@ export class DemoService {
   private buildStream() {}
 
   getMediaStream(): Observable<MediaItem[]> {
+    debugger;
+
     const ct: number = 10;
     const label = "Media created at:";
 
