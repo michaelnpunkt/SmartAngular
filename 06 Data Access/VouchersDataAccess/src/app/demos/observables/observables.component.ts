@@ -10,12 +10,11 @@ import { Observable } from "rxjs/Observable";
 import { Observer, Subscription } from "rxjs";
 import { OnDestroy } from "@angular/core/src/metadata/lifecycle_hooks";
 
-
 enum CurrentView{
   CreateObservableItem,
   CreateObservableArray,
   Filter,
-  Stream
+  GetObservablesFromService
 }
 
 @Component({
@@ -33,6 +32,8 @@ export class ObservablesComponent implements OnInit, OnDestroy {
   view = CurrentView;
 
   mediaObservable: Observable<MediaItem>
+  mediaObsSubscritpion: Subscription;
+
   mediaObservableArray: Observable<MediaItem[]>
   mediaItems: MediaItem[];
     
@@ -52,58 +53,67 @@ export class ObservablesComponent implements OnInit, OnDestroy {
   }
 
   createMediaItemObservable(){
+
+    let label = "Current Media created at:"
     this.currentView = CurrentView.CreateObservableItem;   
 
     this.mediaObservable = Observable.create((observer: Observer<MediaItem>) => {
+      setInterval(() => {
+        observer.next(<MediaItem>{title: `${label} ${moment().format("h:mm:ss a")}`});
+      }, 1000);
+    });
+
+    this.mediaObsSubscritpion = this.mediaObservable.subscribe(
+      (data: MediaItem) => { console.log("Media created: ", data); },
+      (error: string) => { console.log(error); },
+      () => { console.log('completed'); }
+    );
+
+  }
+
+  unsubscribeMediaItem(){
+    this.mediaObsSubscritpion.unsubscribe();
+    console.log("unsbscribed")
+  }
+
+  createMediaItemArrayObservable(){
+
+    let label = "Media created at:"
+    const mediaArray: MediaItem[] = []
+    this.currentView = CurrentView.CreateObservableArray;   
+
+    this.mediaObservableArray = Observable.create((observer: Observer<MediaItem[]>) => {
       setTimeout(() => {
-        observer.next(<MediaItem>{title: `Media created at: ${moment().format("h:mm:ss a")}`});
+        mediaArray.push(<MediaItem>{title: `${label} ${moment().format("h:mm:ss a")}`})
+        observer.next(mediaArray);
       }, 0);
       setTimeout(() => {
-        observer.next(<MediaItem>{title: `Media created at: ${moment().format("h:mm:ss a")}`});
+        mediaArray.push(<MediaItem>{title: `${label} ${moment().format("h:mm:ss a")}`})
+        observer.next(mediaArray);
       }, 2000);
       setTimeout(() => {
-        observer.next(<MediaItem>{title: `Media created at: ${moment().format("h:mm:ss a")}`});
+        mediaArray.push(<MediaItem>{title: `${label} ${moment().format("h:mm:ss a")}`})
+        observer.next(mediaArray);
       }, 4000);
       setTimeout(() => {
         // observer.error('this does not work');
         observer.complete();
       }, 5000);
       setTimeout(() => {
-        observer.next(<MediaItem>{title: `Media created at: ${moment().format("h:mm:ss a")}`});
+        mediaArray.push(<MediaItem>{title: `${label} ${moment().format("h:mm:ss a")}`})
+        observer.next(mediaArray);
       }, 6000);
-    });
 
-    let mediaObsSubscritpion: Subscription = this.mediaObservable.subscribe(
-      (data: MediaItem) => { console.log("Media created: ", data); },
-      (error: string) => { console.log(error); },
-      () => { console.log('completed'); }
-    );
-  }
-
-  createMediaItemArrayObservable(){
-
-    const mediaArray: MediaItem[] = []
-
-    this.currentView = CurrentView.CreateObservableArray;   
-
-    this.mediaObservableArray = Observable.create((observer: Observer<MediaItem[]>) => {
-      setTimeout(() => {
-        mediaArray.push(<MediaItem>{title: `Media created at: ${moment().format("h:mm:ss a")}`})
-        observer.next(mediaArray);
-      }, 0);
-      setTimeout(() => {
-        mediaArray.push(<MediaItem>{title: `Media created at: ${moment().format("h:mm:ss a")}`})
-        observer.next(mediaArray);
-      }, 2000);
-      setTimeout(() => {
-        mediaArray.push(<MediaItem>{title: `Media created at: ${moment().format("h:mm:ss a")}`})
-        observer.next(mediaArray);
-      }, 4000);
     });
 
     this.mediaObservableArray.subscribe((data)=>{
       this.mediaItems = data;
     })
+  }
+
+  createMediaItemArrayService(){
+    this.currentView = CurrentView.GetObservablesFromService;
+      this.ds.getMediaStream().subscribe(data=>this.mediaItems = data);
   }
 
   useFilter() {

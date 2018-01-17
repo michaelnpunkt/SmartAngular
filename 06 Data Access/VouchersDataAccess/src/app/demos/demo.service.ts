@@ -8,7 +8,7 @@ import { MediaItem } from './media-item';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observer } from 'rxjs/Observer';
-
+import * as moment from 'moment';
 
 @Injectable()
 export class DemoService{
@@ -43,17 +43,37 @@ export class DemoService{
     }
   }
 
-  // getMediaStream(): Observable<MediaItem[]> {
-  //   let i = 0;
-  //   return new Observable(observer => {       
-  //     setInterval(
-  //       () => {
-  //         let mi = <MediaItem>{ title: "Movie " + i, startTime: new Date() }
-  //         this.media.push(mi);
-  //         observer.next(this.media);
-  //         i++;
-  //       }, 5000);
-  //   });
-  // }
+  getMediaStream(): Observable<MediaItem[]> {
+      
+      const label = "Media created at:"
+      const mediaArray: MediaItem[] = []
+
+      let mediaObservableArray: Observable<MediaItem[]> = Observable.create((observer: Observer<MediaItem[]>) => {
+      setTimeout(() => {
+        mediaArray.push(<MediaItem>{title: `${label} ${moment().format("h:mm:ss a")}`})
+        observer.next(mediaArray);
+      }, 0);
+      setTimeout(() => {
+        mediaArray.push(<MediaItem>{title: `${label} ${moment().format("h:mm:ss a")}`})
+        observer.next(mediaArray);
+      }, 2000);
+      setTimeout(() => {
+        mediaArray.push(<MediaItem>{title: `${label} ${moment().format("h:mm:ss a")}`})
+        observer.next(mediaArray);
+      }, 4000);
+      setTimeout(() => {
+        // observer.error('this does not work');
+        observer.complete();
+      }, 5000);
+      setTimeout(() => {
+        mediaArray.push(<MediaItem>{title: `${label} ${moment().format("h:mm:ss a")}`})
+        observer.next(mediaArray);
+      }, 6000);
+
+    });
+
+    return mediaObservableArray;
+  }
+
 }
 

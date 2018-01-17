@@ -7,8 +7,9 @@
     <div class='row'>
       <div class='col-xs-5'>
         <h4>Using Observables</h4><br>
-        <a (click)="createMediaItemObservable()">Get Media Observable</a><br />
+        <a (click)="createMediaItemObservable()">Get Media Observable</a> | <a (click)="unsubscribeMediaItem()">Unsubscribe</a><br />
         <a (click)="createMediaItemArrayObservable()">Get Media Array Observable - Simulate Stream</a><br />
+        <a (click)="createMediaItemArrayService()">Get Media Array Observable from Service</a><br />
         <a (click)="useFilter()">Use Filter</a><br />        
       </div>
     </div>    
@@ -17,8 +18,7 @@
 <div class="section">
   <div [ngSwitch]="currentView">
     <div *ngSwitchCase="view.CreateObservableItem">
-      See console for output<br>
-      {{ (mediaObservable | async)?.title}}
+        See console for output - {{ (mediaObservable | async)?.title}}
     </div>
     <div *ngSwitchCase="view.CreateObservableArray">
         <ul>
@@ -50,9 +50,9 @@
         </div>
       </div>
     </div>
-    <div *ngSwitchCase="view.Stream">
+    <div *ngSwitchCase="view.GetObservablesFromService">
       <ul>
-        <li *ngFor="let m of media">{{m.Title}}</li>
+        <li *ngFor="let m of mediaItems">{{m.title}}</li>
       </ul>
     </div>
   </div>
