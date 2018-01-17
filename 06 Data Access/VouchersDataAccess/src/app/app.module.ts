@@ -20,6 +20,7 @@ import { HttpClientsComponent } from './demos/http-clients/http-clients.componen
 import { PromiseComponent } from './demos/promise/promise.component';
 import { ObservablesComponent } from './demos/observables/observables.component';
 import { NoSQLInterceptorComponent } from './demos/no-sqlinterceptor/no-sqlinterceptor.component';
+import { DeepNestingComponent } from './demos/deep-nesting/deep-nesting.component';
 import { RouteGuard } from './route.guard.service';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { AdminComponent } from './admin/admin.component';
@@ -28,6 +29,7 @@ import { HTTP_INTERCEPTORS }from '@angular/common/http';
 
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
+
 registerLocaleData(localeDe)
 
 @NgModule({
@@ -45,7 +47,8 @@ registerLocaleData(localeDe)
     NavbarComponent,
     MatchHeightDirective,
     NoSQLInterceptorComponent,
-    AdminComponent
+    AdminComponent,
+    DeepNestingComponent
   ],
   imports: [
     FormsModule,

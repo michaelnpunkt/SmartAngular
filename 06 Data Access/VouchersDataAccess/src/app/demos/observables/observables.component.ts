@@ -5,6 +5,8 @@ import { DemoService } from "../demo.service";
 import { Observable } from "rxjs/Observable";
 import { MediaItem } from "../media-item";
 import { Voucher } from "../../shared/index";
+import { VouchersService } from "../../vouchers/voucher.service";
+import { setTimeout } from "timers";
 
 @Component({
   selector: "app-observables",
@@ -15,6 +17,7 @@ export class ObservablesComponent implements OnInit {
   constructor(
     private httpClient: HttpClient,
     private http: Http,
+    private vs: VouchersService,
     private ds: DemoService
   ) {}
 
@@ -26,18 +29,7 @@ export class ObservablesComponent implements OnInit {
   upcoming: Observable<MediaItem[]>;
 
   ngOnInit() {
-    this.media = this.ds.getMedia();
-    this.splitMedia();
-  }
-
-  splitMedia(){
-    let dt = new Date();
-    this.current = this.media.map(mis =>
-      mis.filter(mi => mi.startTime < new Date())
-    );
-    this.upcoming = this.media.map(mis =>
-      mis.filter(mi => mi.startTime >= new Date())
-    );
+    
   }
 
   getVouchers() {
@@ -128,12 +120,19 @@ export class ObservablesComponent implements OnInit {
       });
   }
 
-  getVouchersFilter() {
-    this.httpClient
-      .get("http://localhost:5000/api/vouchers")
-      .filter(<Voucher>(v) => v.Text == "Inserted by Angular")
-      .subscribe(data => {
-        this.resultC = data;
-      });
+  useFilter() {
+    this.media = this.ds.getMedia();
+    let dt = new Date();
+    this.current = this.media.map(mis =>
+      mis.filter(mi => mi.startTime < new Date())
+    );
+    this.upcoming = this.media.map(mis =>
+      mis.filter(mi => mi.startTime >= new Date())
+    );
   }
+
+  consumeStream(){
+
+  }
+
 }

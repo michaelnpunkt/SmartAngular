@@ -10,6 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule, ViewChild } from '@angular/core';
 import { AdminComponent } from './admin/admin.component';
 import { RouteGuard } from './route.guard.service';
+import { DeepNestingComponent } from './demos/deep-nesting/deep-nesting.component';
 
 const appRoutes: Routes = [
     { path: '',
@@ -18,7 +19,8 @@ const appRoutes: Routes = [
         { path: 'promise', component: PromiseComponent },
         { path: 'clients', component: HttpClientsComponent },
         { path: 'observables', component: ObservablesComponent },
-        { path: 'nosql', component: NoSQLInterceptorComponent }
+        { path: 'nosql', component: NoSQLInterceptorComponent },
+        { path: 'deepnesting', component: DeepNestingComponent }
       ]
     },
     { path: 'vouchers',
