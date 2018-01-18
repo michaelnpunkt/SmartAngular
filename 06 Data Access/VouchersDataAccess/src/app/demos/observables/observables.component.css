@@ -1,3 +1,31 @@
 a{
     cursor: pointer;   
 }
+
+.box{    
+    margin: 10px; 
+    padding: 10px;
+    cursor: pointer; 
+}
+
+.header{
+    margin: 10px;    
+    color: blue; 
+    font-size: 16px;   
+}
+
+.startTime{    
+    padding: 10px;    
+}
+
+.upcoming{
+    background-color: rgb(235, 204, 70);
+}
+
+.playing{
+    background-color: rgb(225, 200, 248);
+}
+
+.itemGroup{
+    vertical-align: top;
+}

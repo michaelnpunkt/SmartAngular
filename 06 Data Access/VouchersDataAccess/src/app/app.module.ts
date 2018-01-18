@@ -30,6 +30,7 @@ import { ObservableCrudComponent } from './demos/observable-crud/observable-crud
 
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
+import { MediaService } from './demos/observables/media.service';
 registerLocaleData(localeDe)
 
 @NgModule({
@@ -62,7 +63,8 @@ registerLocaleData(localeDe)
   ],
   providers: [
     VouchersService,
-    FirebaseService,        
+    FirebaseService,     
+    MediaService,   
     {provide: LOCALE_ID, useValue: "de-DE"},  
     // {provide: HTTP_INTERCEPTORS, useClass: FirebaseInterceptor, multi: true},  
     RouteGuard

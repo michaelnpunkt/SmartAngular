@@ -4,86 +4,113 @@
 </div>
 
 <div class="section">
+  <div class='row'>
+    <div class='col-xs-5'>
+      <h4>Using Observables</h4>
+      <br>
+      <a (click)="createSingletonObservable()">Get Media Singleton Observable</a> |
+      <a (click)="unsubscribeSingletonObservable()">Unsubscribe</a>
+      <br />
+      <a (click)="createArrayObservable()">Get Media Array Observable - Simulate Stream</a>
+      <br />
+      <a (click)="getArrayObservableFromService()">Get Media Array Observable from Service</a>
+      <br />
+      <a (click)="useFilter()">Use Filter</a>
+      <br />
+      <a (click)="useFilterReactive()">Use Filter Reactive</a>
+      <br />      
+      <a (click)="useBehaviorSubject()">Use Filter using BehaviorSubject</a>
+    </div>
+  </div>
+</div>
+
+<div [ngSwitch]="currentView">
+  
+  <div *ngSwitchCase="view.SingletonObservable">
+    See console for output
+    <br/>{{ (mediaObservable | async)?.title}}
+  </div>
+
+  <div *ngSwitchCase="view.ArrayObservable">
+      <div class='itemGroup col-xs-12'>
+          <div class='row'>
+            <h4>createArrayObservable()</h4>
+          </div>
+          <div class='row'>
+            <div *ngFor="let mi of mediaItems" class="box upcoming col-xs-3">
+              <div class="header">{{mi.title}}</div>
+              <div class="startTime">Start Time: {{mi.startTime | date : "mediumTime"}}</div>
+            </div>
+          </div>
+        </div>
+  </div>
+
+  <div *ngSwitchCase="view.ArrayObservableFromService">
+      <div class='itemGroup col-xs-12'>
+        <div class='row'>
+          <h4>GetObservablesFromService()</h4>
+        </div>
+        <div class='row'>
+          <div *ngFor="let mi of mediaItems" class="box upcoming col-xs-3">
+            <div class="header">{{mi.title}}</div>
+            <div class="startTime">Start Time: {{mi.startTime | date : "mediumTime"}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <div *ngSwitchCase="view.Filter">
+    
+    <div class='itemGroup col-xs-12'>
+      <div class='row'>
+        <h4>Now Playing</h4>
+      </div>
+      <div class='col-xs-12' style='vertical-align: top'>
+        <div class='row'>
+          <div class="box playing col-xs-3" *ngFor="let mi of playing | async">
+            <div class="header">{{mi.title}}</div>
+            <div class="startTime">Start Time: {{mi.startTime | date : "mediumTime"}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class='itemGroup col-xs-12'>
+      <div class='row'>
+        <h4>Upcoming</h4>
+      </div>
+      <div class='row'>
+        <div class="box upcoming col-xs-3" *ngFor="let mi of upcoming | async">
+          <div class="header">{{mi.title}}</div>
+          <div class="startTime">Start Time: {{mi.startTime | date : "mediumTime"}}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngSwitchCase="view.FilterReactive">
+
     <div class='row'>
       <div class='col-xs-5'>
-        <h4>Using Observables</h4><br>
-        <a (click)="createMediaItemObservable()">Get Media Observable</a> | <a (click)="unsubscribeMediaItem()">Unsubscribe</a><br />
-        <a (click)="createMediaItemArrayObservable()">Get Media Array Observable - Simulate Stream</a><br />
-        <a (click)="createMediaItemArrayService()">Get Media Array Observable from Service</a><br />
-        <a (click)="useFilter()">Use Filter</a><br />        
-        <a (click)="useFilterReactive()">Use Filter Reactive</a><br />      
-        <a (click)="useFilterReactive$()">Use Filter Reactive Stream</a><br />
+        <h4>Currently playing:</h4>
+        <br>
       </div>
-    </div>    
-  </div>
-
-<div class="section">
-  <div [ngSwitch]="currentView">
-    <div *ngSwitchCase="view.CreateObservableItem">
-        See console for output <br/>{{ (mediaObservable | async)?.title}}
-    </div>
-    <div *ngSwitchCase="view.CreateObservableArray">
+      <div class='col-xs-7' style='vertical-align: top'>
         <ul>
-          <li *ngFor="let mi of mediaItems">{{mi.title}}</li>
+          <li *ngFor="let mi of playingLocal | async">{{mi.title}}, Start Time: {{mi.startTime | date : "mediumTime"}}</li>
         </ul>
-    </div>
-    <div *ngSwitchCase="view.Filter">
-      <div class='row'>
-        <div class='col-xs-5'>
-          <h4>Currently playing:</h4>
-          <br>
-        </div>
-        <div class='col-xs-7' style='vertical-align: top'>
-          <ul>
-            <li *ngFor="let mi of current | async">{{mi.title}}, Start Time: {{mi.startTime | date : "mediumTime"}}</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class='row'>
-        <div class='col-xs-5'>
-          <h4>Available Soon</h4>
-          <br>
-        </div>
-        <div class='col-xs-7' style='vertical-align: top'>
-          <ul>
-            <li *ngFor="let mi of upcoming | async">{{mi.title}}, Start Time: {{mi.startTime | date : "mediumTime"}}</li>
-          </ul>
-        </div>
       </div>
     </div>
-    <div *ngSwitchCase="view.FilterReactive">
-        <div class='row'>
-          <div class='col-xs-5'>
-            <h4>Currently playing:</h4>
-            <br>
-          </div>
-          <div class='col-xs-7' style='vertical-align: top'>
-            <ul>
-              <li *ngFor="let mi of playingLocal | async">{{mi.title}}, Start Time: {{mi.startTime | date : "mediumTime"}}</li>
-            </ul>
-          </div>
-        </div>
-  
-        <div class='row'>
-          <div class='col-xs-5'>
-            <h4>Available Soon</h4>
-            <br>
-          </div>
-          <div class='col-xs-7' style='vertical-align: top'>
-            <ul>
-              <li *ngFor="let mi of upcomingLocal | async">{{mi.title}}, Start Time: {{mi.startTime | date : "mediumTime"}}</li>
-            </ul>
-          </div>
-        </div>
+    <div class='row'>
+      <div class='col-xs-5'>
+        <h4>Available Soon</h4>
+        <br>
       </div>
-    <div *ngSwitchCase="view.GetObservablesFromService">
-      <ul>
-        <li *ngFor="let m of mediaItems">{{m.title}}</li>
-      </ul>
+      <div class='col-xs-7' style='vertical-align: top'>
+        <ul>
+          <li *ngFor="let mi of upcomingLocal | async">{{mi.title}}, Start Time: {{mi.startTime | date : "mediumTime"}}</li>
+        </ul>
+      </div>
     </div>
   </div>
-  
 
-
-</div>
