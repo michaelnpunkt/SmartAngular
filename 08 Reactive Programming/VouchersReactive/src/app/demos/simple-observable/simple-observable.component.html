@@ -8,10 +8,13 @@
       <h4>Observable Basics</h4><br>
       <a (click)="useObsFrom()">Use Observer.from()</a><br />
       <a (click)="useObsCreate()">Use Observer.Create()</a><br />
+      <a (click)="useOperator()">Use Operator()</a><br />
+      <a (click)="usePromiseToObs()">PromiseToObservable()</a><br />
+      <a (click)="usePromiseToObs()">Using Fetch Api()</a><br />
     </div>
     <div class='col-xs-9' style='vertical-align: top'>
       <h5>Result</h5><br>
-      {{result | json}}
+      {{result | async}}
     </div>
   </div>    
 </div>
