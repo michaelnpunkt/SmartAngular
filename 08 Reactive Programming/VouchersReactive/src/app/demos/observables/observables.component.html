@@ -5,7 +5,7 @@
 
 <div class="section">
   <div class='row'>
-    <div class='col-xs-5'>
+    <div class='col-xs-12'>
       <h4>Using Observables</h4>
       <br>
       <a (click)="createSingletonObservable()">Get Media Singleton Observable</a> |
@@ -15,12 +15,10 @@
       <br />
       <a (click)="getArrayObservableFromService()">Get Media Array Observable from Service</a>
       <br />
-      <a (click)="useFilterStaticArray()">Use Filter with static Array</a>
+      <a (click)="useFilterStaticArray()">Use Filter with static Array & Filter with ES6</a>
       <br />
-      <a (click)="useFilter()">Use Filter</a>
+      <a (click)="useFilterWithStream()">Use Filter with Stream & Filter with Operators</a>
       <br />
-      <a (click)="useFilterReactive()">Use Filter Reactive</a>
-      <br />      
       <a (click)="useBehaviorSubject()">Use Filter using BehaviorSubject</a>
     </div>
   </div>
@@ -30,7 +28,7 @@
   
   <div *ngSwitchCase="view.SingletonObservable">
     See console for output
-    <br/>{{ (mediaObservable | async)?.title}}
+    <br/>{{ (mediaSingleton | async)?.title}}
   </div>
 
   <div *ngSwitchCase="view.ArrayObservable">

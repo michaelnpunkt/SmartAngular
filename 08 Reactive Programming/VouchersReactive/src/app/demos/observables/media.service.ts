@@ -26,6 +26,7 @@ export class MediaService {
           this.media$.push(movieGenerator.next().value)
         }
         observer.next(this.media$);
+        observer.complete();
       }
     );
     return mediaObservableArray;

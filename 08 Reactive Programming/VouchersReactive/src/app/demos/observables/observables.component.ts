@@ -24,9 +24,14 @@ enum CurrentView{
   styleUrls: ["./observables.component.scss"]
 })
 export class ObservablesComponent implements OnInit, OnDestroy {
+  
+  currentView: CurrentView;
+  view = CurrentView;
+
+  mediaSingleton: Observable<MediaItem>
+  mediaSingletonSub: Subscription;
 
   media: Observable<MediaItem[]>;
-  mediaBS: Observable<MediaItem[]>;
 
   playing: Observable<MediaItem[]>;
   upcoming: Observable<MediaItem[]>;
@@ -34,13 +39,7 @@ export class ObservablesComponent implements OnInit, OnDestroy {
   playingArray: MediaItem[];
   upcomingArray: MediaItem[];
 
-  currentView: CurrentView;
-  view = CurrentView;
 
-  mediaObservable: Observable<MediaItem>
-  mediaSingletonObs: Subscription;
-
-  mediaArrayObs: Observable<MediaItem[]>
   mediaItems: MediaItem[];
     
   constructor(
@@ -63,13 +62,13 @@ export class ObservablesComponent implements OnInit, OnDestroy {
     this.currentView = CurrentView.SingletonObservable;   
     let label = "Current Media created at:"
    
-    this.mediaObservable = Observable.create((observer: Observer<MediaItem>) => {
+    this.mediaSingleton = Observable.create((observer: Observer<MediaItem>) => {
       setInterval(() => {
         observer.next(<MediaItem>{title: `${label} ${moment().format("h:mm:ss a")}`});
       }, 1000);
     });
 
-    this.mediaSingletonObs = this.mediaObservable.subscribe(
+    this.mediaSingletonSub = this.mediaSingleton.subscribe(
       (data: MediaItem) => { console.log("Media created: ", data); },
       (error: string) => { console.log(error); },
       () => { console.log('completed'); }
@@ -79,7 +78,7 @@ export class ObservablesComponent implements OnInit, OnDestroy {
 
   unsubscribeSingletonObservable(){
 
-    this.mediaSingletonObs.unsubscribe();
+    this.mediaSingletonSub.unsubscribe();
     console.log("unsbscribed mediaObsSubscritption")
 
   }
@@ -90,7 +89,7 @@ export class ObservablesComponent implements OnInit, OnDestroy {
     let label = "Media "
     const mediaArray: MediaItem[] = []
        
-    this.mediaArrayObs = Observable.create((observer: Observer<MediaItem[]>) => {
+    this.media = Observable.create((observer: Observer<MediaItem[]>) => {
       setTimeout(() => {
         mediaArray.push(<MediaItem>{title: `${label} 1`, startTime: new Date()})
         observer.next(mediaArray);
@@ -114,7 +113,7 @@ export class ObservablesComponent implements OnInit, OnDestroy {
 
     });
 
-    this.mediaArrayObs.subscribe((data)=>{
+    this.media.subscribe((data)=>{
       this.mediaItems = data;
     })
   }
@@ -129,9 +128,8 @@ export class ObservablesComponent implements OnInit, OnDestroy {
   useFilterStaticArray(){
     
     this.currentView = CurrentView.FilterArrayBinding;
-
     this.mediaService.getMedia().subscribe((data: MediaItem[])=>{
-      console.log("new data arrived from mediaService.getMediaStream()", data);
+
       let dt = new Date();
       this.playingArray = data.filter(item => {
         return item.startTime < dt;
@@ -142,89 +140,35 @@ export class ObservablesComponent implements OnInit, OnDestroy {
     });
   }
 
-  useFilter(){
+  useFilterWithStream(){
     
     this.currentView = CurrentView.FilterArrayBinding;
-
     this.media = this.mediaService.getMediaStream();
     
-    // let dt = new Date();
-    // this.playing = this.media$.map(mis =>
-    //   mis.filter(mi => mi.startTime < dt)
-    // );
-    // this.upcoming = this.media$.map(mis =>
-    //   mis.filter(mi => mi.startTime >= dt)
-    // );   
-
     this.media.subscribe((data: MediaItem[]) => {
-      console.log("new data arrived from mediaService.getMediaStream()", data);
+      
       let dt = new Date();
-      console.log("Compare Date", dt)
       this.playingArray = data.filter(item => {
-        console.log("comparing", item);
-        item.startTime < dt;
+        return item.startTime < dt;
       });
-      console.log("Playing Array:", this.playingArray)
       this.upcomingArray = data.filter(item => {
-        item.startTime >= dt;
+        return item.startTime >= dt;
       });
-      console.log("Upcoming Array:", this.upcomingArray)
     });
-
-  }
-
-  useFilterReactive(){
-    debugger;
-
-    this.currentView = CurrentView.FilterArrayBinding;
-
-    // 
-    const media$ = this.mediaService.getMediaStream();
-    media$.subscribe(data=>{
-
-      console.log("data changed", data)
-      // let dt = new Date();
-      // this.playingLocal = data.filter((item:MediaItem)=>{
-      //   item.startTime < dt;
-      // })
-      // this.upcomingLocal = data.filter((item:MediaItem)=>{
-      //   item.startTime >= dt;
-      // })
-
-      // let dt = new Date();
-      // this.current = this.media.map(mis =>
-      //   mis.filter(mi => mi.startTime < new Date())
-      // );
-      // this.upcoming = this.media.map(mis =>
-      //   mis.filter(mi => mi.startTime >= new Date())
-      // );
-
-    })   
-
-    this.mediaService.getMediaStream().subscribe(data =>{
-
-      let dt = new Date();
-      this.playing = this.mediaBS.map(mis =>
-        mis.filter(mi => mi.startTime < new Date())
-      );
-      this.upcoming = this.mediaBS.map(mis =>
-        mis.filter(mi => mi.startTime >= new Date())
-      );
-
-    })    
   }
 
   useBehaviorSubject() {
 
     this.currentView = CurrentView.FilterObsBinding;
 
-    this.mediaBS = this.mediaService.getObservableUsingBehaviorSubj();
+    this.media = this.mediaService.getObservableUsingBehaviorSubj();
 
     let dt = new Date();
-    this.playing = this.mediaBS.map(mis =>
+    
+    this.playing = this.media.map(mis =>
       mis.filter(mi => mi.startTime < new Date())
     );
-    this.upcoming = this.mediaBS.map(mis =>
+    this.upcoming = this.media.map(mis =>
       mis.filter(mi => mi.startTime >= new Date())
     );
   }

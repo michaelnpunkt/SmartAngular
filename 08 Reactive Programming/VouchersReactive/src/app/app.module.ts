@@ -27,6 +27,7 @@ import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import { MediaService } from './demos/observables/media.service';
 import { MediaItemComponent } from './demos/observables/media-item/media-item.component';
+import { SimpleObservableComponent } from './demos/simple-observable/simple-observable.component';
 registerLocaleData(localeDe)
 
 @NgModule({
@@ -44,7 +45,8 @@ registerLocaleData(localeDe)
     AdminComponent,
     DeepNestingComponent,
     ObservableCrudComponent,
-    MediaItemComponent
+    MediaItemComponent,
+    SimpleObservableComponent
   ],
   imports: [
     FormsModule,
