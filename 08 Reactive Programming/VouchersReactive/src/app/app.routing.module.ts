@@ -7,8 +7,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule, ViewChild } from '@angular/core';
 import { AdminComponent } from './admin/admin.component';
 import { RouteGuard } from './route.guard.service';
-import { DeepNestingComponent } from './demos/deep-nesting/deep-nesting.component';
 import { ObservableCrudComponent } from './demos/observable-crud/observable-crud.component';
+import { SimpleObservableComponent } from './demos/simple-observable/simple-observable.component';
 
 const appRoutes: Routes = [
     { path: '',
@@ -16,7 +16,7 @@ const appRoutes: Routes = [
       children: [
         { path: 'observables', component: ObservablesComponent },
         { path: 'observablescurd', component: ObservableCrudComponent },        
-        { path: 'deepnesting', component: DeepNestingComponent }
+        { path: 'observables-basics', component: SimpleObservableComponent }
       ]
     },
     { path: 'vouchers',

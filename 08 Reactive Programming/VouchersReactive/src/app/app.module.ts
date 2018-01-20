@@ -16,7 +16,6 @@ import { VoucherDetailComponent } from './vouchers/voucher/voucher-detail/vouche
 import { VoucherDetailsListComponent } from './vouchers/voucher/voucher-details-list/voucher-details-list.component';
 import { VouchersService } from './vouchers/voucher.service';
 import { ObservablesComponent } from './demos/observables/observables.component';
-import { DeepNestingComponent } from './demos/deep-nesting/deep-nesting.component';
 import { RouteGuard } from './route.guard.service';
 import { BsDatepickerModule } from 'ngx-bootstrap';
 import { AdminComponent } from './admin/admin.component';
@@ -43,7 +42,6 @@ registerLocaleData(localeDe)
     NavbarComponent,
     MatchHeightDirective,
     AdminComponent,
-    DeepNestingComponent,
     ObservableCrudComponent,
     MediaItemComponent,
     SimpleObservableComponent

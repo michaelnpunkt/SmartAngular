@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-simple-observable',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SimpleObservableComponent implements OnInit {
 
+  result: Observable<number []>;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  useObsFrom(){
+
+  }
+
+  useObsCreate(){
+
+  }
+
+  usePromiseToObs(){
+    
   }
 
 }
