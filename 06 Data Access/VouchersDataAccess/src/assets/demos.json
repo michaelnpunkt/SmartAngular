@@ -1,8 +1,0 @@
-[
-    {"url": "clients", "title": "Comparing HttpClients", "component": "HttpClientsComponent"},
-    {"url": "promise", "title": "Using Promises CRUD", "component": "PromiseComponent"},
-    {"url": "nosql", "title": "Using NoSQL & Interceptor", "component": "NoSQLInterceptorComponent"},
-    {"url": "observablescurd", "title": "Observables CRUD", "component": "ObservableCrudComponent"},
-    {"url": "observables", "title": "Using Observables", "component": "ObservablesComponent"},    
-    {"url": "deepnesting", "title": "Deep Nesting", "component": "DeepNestingComponent"}
-]
