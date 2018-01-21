@@ -1,5 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Observable } from "rxjs/Observable";
+import { Subscription } from "rxjs";
+import 'rxjs/add/observable/fromPromise';
+import { Voucher } from "../../shared/index";
 
 @Component({
   selector: "app-simple-observable",
@@ -7,22 +10,38 @@ import { Observable } from "rxjs/Observable";
   styleUrls: ["./simple-observable.component.scss"]
 })
 export class SimpleObservableComponent implements OnInit {
+  
+  fName: string;
+  url = "/assets/vouchers.json";
   numbers = [1, 5, 10, 18, 22];
-  result: Observable<number[]>;
-  url = "/assets/demos.json";
 
+  nbrObs: Observable<number>;
+  result: Voucher[];
+
+  nbrSubscription : Subscription;
+  
   constructor() {}
 
   ngOnInit() {}
 
   useObsFrom() {
-    let result = Observable.from(this.numbers).subscribe((data: number) =>
+
+    this.fName = "useObsFrom()";
+
+    this.nbrObs = Observable.from(this.numbers);
+    this.nbrObs.subscribe((data: number) =>  console.log("useObsFrom: ", data))
+
+    //Same as above using chaining
+    this.nbrSubscription = Observable.from(this.numbers).subscribe((data: number) =>
       console.log("useObsFrom: ", data)
     );
   }
 
   useObsCreate() {
-    this.result = Observable.create(observer => {
+
+    this.fName = "useObsCreate()";
+
+    this.nbrObs = Observable.create(observer => {
       let index = 0;
 
       let getNumber = () => {
@@ -38,13 +57,16 @@ export class SimpleObservableComponent implements OnInit {
       getNumber();
     });
 
-    this.result.subscribe((data: number[]) =>
+    this.nbrObs.subscribe((data: number) =>
       console.log("useObsCreate: ", data)
     );
   }
 
   useOperator() {
-    this.result = Observable.create(observer => {
+
+    this.fName = "useOperator()";
+
+    this.nbrObs = Observable.create(observer => {
       let index = 0;
 
       let getNumber = () => {
@@ -62,12 +84,13 @@ export class SimpleObservableComponent implements OnInit {
       .map(n => n * 2)
       .filter(n => n > 4);
 
-    this.result.subscribe((data: number[]) =>
+    this.nbrObs.subscribe((data: number) =>
       console.log("useOperator: ", data)
     );
   }
 
   simpleLoad(): Observable<any> {
+ 
     return Observable.create(observer => {
       let xhr = new XMLHttpRequest();
 
@@ -86,7 +109,35 @@ export class SimpleObservableComponent implements OnInit {
     });
   }
 
-  usePromiseToObs() {
-    let load = this.simpleLoad().subscribe(data => console.log(data));
+  useAsyncToObs() {
+
+    this.fName = "usePromiseToObs()";
+
+    let load = this.simpleLoad().subscribe(data => {
+      console.log("data loaded", data)
+      this.result = data;
+    });
   }
+
+  getPromise(succeed: boolean) : Promise<number[]>{
+    
+    return new Promise<number[]>((resolve, reject)=>{
+      setTimeout(() => {
+        console.log("Async Task Complete");
+        if (succeed) {
+          resolve(this.numbers);
+        } else {
+          reject("Outcome: Promise rejected");
+        }
+      }, 1000);
+    });
+  }
+
+  usePromiseToObs(){
+
+    this.fName = "see console for output";
+    let pObs = Observable.fromPromise(this.getPromise(true)).subscribe(data=>console.log("usePromiseToObs", data));
+
+  }
+
 }

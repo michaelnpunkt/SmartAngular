@@ -28,8 +28,8 @@ export class ObservablesComponent implements OnInit, OnDestroy {
   currentView: CurrentView;
   view = CurrentView;
 
-  mediaSingleton: Observable<MediaItem>
   mediaSingletonSub: Subscription;
+  mediaSingleton: Observable<MediaItem>
 
   media: Observable<MediaItem[]>;
 

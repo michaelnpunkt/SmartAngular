@@ -4,17 +4,31 @@
 
 <div class="section">
   <div class='row'>
-    <div class='col-xs-3'>
+    <div class='col-xs-12'>
       <h4>Observable Basics</h4><br>
       <a (click)="useObsFrom()">Use Observer.from()</a><br />
       <a (click)="useObsCreate()">Use Observer.Create()</a><br />
       <a (click)="useOperator()">Use Operator()</a><br />
-      <a (click)="usePromiseToObs()">PromiseToObservable()</a><br />
-      <a (click)="usePromiseToObs()">Using Fetch Api()</a><br />
-    </div>
-    <div class='col-xs-9' style='vertical-align: top'>
-      <h5>Result</h5><br>
-      {{result | async}}
+      <a (click)="useAsyncToObs()">Use Async Operation()</a><br />
+      <a (click)="usePromiseToObs()">PromiseToObservable(</a><br />
     </div>
   </div>    
+
+</div>
+
+<div class="section">
+  <div class='row'>
+    <div class='col-xs-12' style='vertical-align: top'>
+      <h5>Result: {{fName}}</h5><br>
+      {{nbrObs | async}}
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <div class='row'>
+    <div class='col-xs-12' style='vertical-align: top'>
+      <pre> {{result | json}} </pre>
+    </div>
+  </div>
 </div>
