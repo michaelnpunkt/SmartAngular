@@ -12,3 +12,23 @@ yarn add @angular/common@latest @angular/compiler@latest @angular/compiler-cli@l
 npm install --save @angular/material @angular/cdk
 
 npm install ngx-bootstrap@1.9.3
+
+## GIT Commands
+
+Add files to Git: `git add .`
+
+Commit files: `git commit -m "Your message"` 
+
+Pull / Push from / to repository: `git pull / git push` 
+
+List Branches: `git branch -a` 
+
+Create a new Branch: `git checkout -b [name_of_your_new_branch]`
+
+Push new Branch to remote: `git push origin [name_of_your_new_branch]`
+
+Switch to Branch: `git checkout [name_of_your_branch]`
+
+Merge Branch: 
+    * Switch to Master Branch:`git checkout master` 
+    * Merging: `git mere [name_of_branch_to_merge]` 
