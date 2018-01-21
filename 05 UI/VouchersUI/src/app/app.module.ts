@@ -24,6 +24,7 @@ import { RouteGuard } from './route.guard.service';
 import { VoucherDetailComponent } from './vouchers/voucher/voucher-detail/voucher-detail.component';
 import { VoucherDetailsListComponent } from './vouchers/voucher/voucher-details-list/voucher-details-list.component';
 import { BsDatepickerModule } from 'ngx-bootstrap';
+import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
@@ -57,7 +58,8 @@ registerLocaleData(localeDe)
     BsDatepickerModule.forRoot(),    
     MatTableModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    NgxChartsModule
   ],
   providers: [
     VouchersService,
