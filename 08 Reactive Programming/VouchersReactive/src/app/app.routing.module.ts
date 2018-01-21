@@ -9,6 +9,7 @@ import { AdminComponent } from './admin/admin.component';
 import { RouteGuard } from './route.guard.service';
 import { ObservableCrudComponent } from './demos/observable-crud/observable-crud.component';
 import { SimpleObservableComponent } from './demos/simple-observable/simple-observable.component';
+import { MouseDomObservablesComponent } from './demos/mouse-dom-observables/mouse-dom-observables.component';
 
 const appRoutes: Routes = [
     { path: '',
@@ -16,7 +17,8 @@ const appRoutes: Routes = [
       children: [
         { path: 'observables', component: ObservablesComponent },
         { path: 'observablescurd', component: ObservableCrudComponent },        
-        { path: 'observables-basics', component: SimpleObservableComponent }
+        { path: 'observables-basics', component: SimpleObservableComponent },
+        { path: 'mousedomobs', component: MouseDomObservablesComponent }
       ]
     },
     { path: 'vouchers',

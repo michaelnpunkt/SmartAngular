@@ -27,6 +27,7 @@ import localeDe from '@angular/common/locales/de';
 import { MediaService } from './demos/observables/media.service';
 import { MediaItemComponent } from './demos/observables/media-item/media-item.component';
 import { SimpleObservableComponent } from './demos/simple-observable/simple-observable.component';
+import { MouseDomObservablesComponent } from './demos/mouse-dom-observables/mouse-dom-observables.component';
 registerLocaleData(localeDe)
 
 @NgModule({
@@ -44,7 +45,8 @@ registerLocaleData(localeDe)
     AdminComponent,
     ObservableCrudComponent,
     MediaItemComponent,
-    SimpleObservableComponent
+    SimpleObservableComponent,
+    MouseDomObservablesComponent
   ],
   imports: [
     FormsModule,

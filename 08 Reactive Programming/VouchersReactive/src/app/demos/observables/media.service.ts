@@ -6,7 +6,8 @@ import { Observer, BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class MediaService {
-    
+  
+  private intervalSec = 3;
   private media$: MediaItem[] = [];
   private mediaBS$: MediaItem[] = [];
   
@@ -54,7 +55,7 @@ export class MediaService {
     setTimeout(() => {
       this.media$.push(item);
       observer.next(this.media$);
-    }, (idx + 2) * 1000);
+    }, (idx + this.intervalSec) * 1000);
   }
 
   private buildMedia(initialCount: number) : MediaItem[] {
