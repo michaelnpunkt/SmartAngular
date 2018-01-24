@@ -14,8 +14,11 @@ export interface IAjaxCallback {
 
 export class VoucherService {
   getVouchers(): Promise<Voucher[]> {
+
+    let url = "http://voucherservice.integrations.at";
+
     return new Promise<Voucher[]>((resolve, reject) => {
-      fetch("/assets/vouchers.json")
+      fetch(url)
         .then(data => {
           resolve(data.json());
         })

@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import * as moment from "moment";
 import * as $ from "jquery";
+import { Voucher } from "../../shared/model/model";
 
 @Component({
   selector: "app-types",
@@ -143,7 +144,28 @@ export class TypesComponent implements OnInit {
     //n = "on the way"; // compile-time error
 
     if (n === VoucherStatus.complete) {
+      
     }
+
+    function handleVoucher(v: Voucher, status: VoucherStatus){
+      switch(status){
+        case VoucherStatus.complete:
+            console.log(`got voucher ${v}: will pay`);
+            break;
+          case VoucherStatus.draft:
+            console.log(`got voucher ${v}: will save to O365`)
+            break;
+          case VoucherStatus.pending:
+            console.log(`got voucher ${v}: will call the accountant`)
+            break;
+          default:
+            console.log("...")
+            break;
+      }
+    }
+
+    handleVoucher(<Voucher>{ ID: 1, Text: "Media Markt", Amount: 22, Date: new Date() }, n);
+
   }
 
   useTypings() {

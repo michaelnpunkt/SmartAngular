@@ -38,9 +38,10 @@ export class ServicesComponent implements OnInit {
   }
 
   usingFetch() {
-    fetch("./assets/vouchers.json").then(data =>
-      console.log("Data received from fetch", data)
-    );
+    fetch("./assets/vouchers.json").then(response => {
+      console.log("Response received from fetch", response);
+      console.log("Promise received from fetch", response.json());
+    });
   }
 
   usingFetchAwait() {
