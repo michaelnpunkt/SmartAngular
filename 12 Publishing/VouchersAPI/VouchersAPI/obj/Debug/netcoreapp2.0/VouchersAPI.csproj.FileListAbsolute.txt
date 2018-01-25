@@ -76,3 +76,15 @@ C:\_Data\Webs\Voucherservice\VouchersAPI\VouchersAPI\bin\Debug\netcoreapp2.0\Vou
 C:\_Data\Webs\Voucherservice\VouchersAPI\VouchersAPI\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
 C:\_Data\Webs\Voucherservice\VouchersAPI\VouchersAPI\obj\Debug\netcoreapp2.0\Vouchers.dll
 C:\_Data\Webs\Voucherservice\VouchersAPI\VouchersAPI\obj\Debug\netcoreapp2.0\Vouchers.pdb
+C:\Users\Administrator\Desktop\Voucherservice\VouchersAPI\VouchersAPI\bin\Debug\netcoreapp2.0\Vouchers.deps.json
+C:\Users\Administrator\Desktop\Voucherservice\VouchersAPI\VouchersAPI\bin\Debug\netcoreapp2.0\Vouchers.runtimeconfig.json
+C:\Users\Administrator\Desktop\Voucherservice\VouchersAPI\VouchersAPI\bin\Debug\netcoreapp2.0\Vouchers.runtimeconfig.dev.json
+C:\Users\Administrator\Desktop\Voucherservice\VouchersAPI\VouchersAPI\bin\Debug\netcoreapp2.0\Vouchers.dll
+C:\Users\Administrator\Desktop\Voucherservice\VouchersAPI\VouchersAPI\bin\Debug\netcoreapp2.0\Vouchers.pdb
+C:\Users\Administrator\Desktop\Voucherservice\VouchersAPI\VouchersAPI\obj\Debug\netcoreapp2.0\VouchersAPI.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Voucherservice\VouchersAPI\VouchersAPI\obj\Debug\netcoreapp2.0\VouchersAPI.csproj.CoreCompileInputs.cache
+C:\Users\Administrator\Desktop\Voucherservice\VouchersAPI\VouchersAPI\obj\Debug\netcoreapp2.0\UserSecretsAssemblyInfo.cs
+C:\Users\Administrator\Desktop\Voucherservice\VouchersAPI\VouchersAPI\obj\Debug\netcoreapp2.0\VouchersAPI.AssemblyInfoInputs.cache
+C:\Users\Administrator\Desktop\Voucherservice\VouchersAPI\VouchersAPI\obj\Debug\netcoreapp2.0\VouchersAPI.AssemblyInfo.cs
+C:\Users\Administrator\Desktop\Voucherservice\VouchersAPI\VouchersAPI\obj\Debug\netcoreapp2.0\Vouchers.dll
+C:\Users\Administrator\Desktop\Voucherservice\VouchersAPI\VouchersAPI\obj\Debug\netcoreapp2.0\Vouchers.pdb
