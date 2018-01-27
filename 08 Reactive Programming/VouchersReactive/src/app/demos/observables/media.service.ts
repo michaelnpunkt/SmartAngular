@@ -72,7 +72,6 @@ export class MediaService {
 
     console.log("using: getObservableUsingBehaviorSubj()")
     let bs: BehaviorSubject<MediaItem[]> = new BehaviorSubject<MediaItem[]>(this.buildMedia(initialCount));
-
     return bs.asObservable();
   }
 
