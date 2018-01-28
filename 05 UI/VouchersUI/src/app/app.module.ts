@@ -28,6 +28,8 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
+import { MovieService } from './demos/movie.service';
+
 registerLocaleData(localeDe)
 
 @NgModule({
@@ -63,6 +65,7 @@ registerLocaleData(localeDe)
   ],
   providers: [
     VouchersService,
+    MovieService,
     {provide: LOCALE_ID, useValue: "de-DE"},
     RouteGuard
   ],
