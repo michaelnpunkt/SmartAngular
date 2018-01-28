@@ -11,6 +11,7 @@ import { NgModule, ViewChild } from '@angular/core';
 import { AdminComponent } from './admin/admin.component';
 import { RouteGuard } from './route.guard.service';
 import { FlexboxComponent } from './demos/flexbox/flexbox.component';
+import { MaterialTableComponent } from './demos/material-table/material-table.component';
 
 const appRoutes: Routes = [
     { path: '',
@@ -19,6 +20,7 @@ const appRoutes: Routes = [
         { path: 'cssbasics', component: CSSBindingComponent },
         { path: 'bootstrap', component: UsingBootstrapComponent },
         { path: 'material', component: UsingMaterialComponent },
+        { path: 'material-table', component: MaterialTableComponent },
         { path: 'flexbox', component: FlexboxComponent },
         { path: 'thirdparty', component: UsingThirdpartyComponent }
       ]

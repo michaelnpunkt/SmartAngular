@@ -18,7 +18,7 @@ import { CSSBindingComponent } from './demos/cssbinding/binding.component';
 import { UsingBootstrapComponent } from './demos/using-bootstrap/using-bootstrap.component';
 import { UsingMaterialComponent } from './demos/using-material/using-material.component';
 import { UsingThirdpartyComponent } from './demos/using-thirdparty/using-thirdparty.component';
-import { MatTableModule, MatFormFieldModule, MatInputModule } from '@angular/material';
+import { MatTableModule, MatFormFieldModule, MatInputModule, MatSidenav, MatSidenavContainer, MatList, MatToolbar, MatSidenavModule, MatListModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatCardModule } from '@angular/material';
 import { AdminComponent } from './admin/admin.component';
 import { RouteGuard } from './route.guard.service';
 import { VoucherDetailComponent } from './vouchers/voucher/voucher-detail/voucher-detail.component';
@@ -30,6 +30,7 @@ import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import { MovieService } from './demos/movie.service';
 import { FlexboxComponent } from './demos/flexbox/flexbox.component';
+import { MaterialTableComponent } from './demos/material-table/material-table.component';
 
 registerLocaleData(localeDe)
 
@@ -49,7 +50,7 @@ registerLocaleData(localeDe)
     UsingBootstrapComponent, 
     UsingMaterialComponent, 
     UsingThirdpartyComponent, 
-    FlexboxComponent    
+    FlexboxComponent, MaterialTableComponent    
   ],
   imports: [
     FormsModule,
@@ -59,8 +60,17 @@ registerLocaleData(localeDe)
     RouterModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    BsDatepickerModule.forRoot(),    
+    BsDatepickerModule.forRoot(), 
+    MatSidenavModule,
+    MatListModule,
+    MatToolbarModule,   
+    MatIconModule,
     MatTableModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatMenuModule,
+    MatCardModule,
     MatFormFieldModule,
     MatInputModule,
     NgxChartsModule
