@@ -10,6 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule, ViewChild } from '@angular/core';
 import { AdminComponent } from './admin/admin.component';
 import { RouteGuard } from './route.guard.service';
+import { FlexboxComponent } from './demos/flexbox/flexbox.component';
 
 const appRoutes: Routes = [
     { path: '',
@@ -18,6 +19,7 @@ const appRoutes: Routes = [
         { path: 'cssbasics', component: CSSBindingComponent },
         { path: 'bootstrap', component: UsingBootstrapComponent },
         { path: 'material', component: UsingMaterialComponent },
+        { path: 'flexbox', component: FlexboxComponent },
         { path: 'thirdparty', component: UsingThirdpartyComponent }
       ]
     },

@@ -29,6 +29,7 @@ import {NgxChartsModule} from '@swimlane/ngx-charts';
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import { MovieService } from './demos/movie.service';
+import { FlexboxComponent } from './demos/flexbox/flexbox.component';
 
 registerLocaleData(localeDe)
 
@@ -47,7 +48,8 @@ registerLocaleData(localeDe)
     CSSBindingComponent,
     UsingBootstrapComponent, 
     UsingMaterialComponent, 
-    UsingThirdpartyComponent    
+    UsingThirdpartyComponent, 
+    FlexboxComponent    
   ],
   imports: [
     FormsModule,
