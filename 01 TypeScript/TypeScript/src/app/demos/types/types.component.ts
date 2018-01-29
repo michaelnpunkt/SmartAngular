@@ -14,7 +14,7 @@ export class TypesComponent implements OnInit {
   ngOnInit() {}
 
   basicVariables() {
-    debugger;
+    // debugger;
 
     var myname: string = "alex";
 

@@ -12,9 +12,38 @@ import {
   styleUrls: ["./services.component.css"]
 })
 export class ServicesComponent implements OnInit {
+
+  url = "/assets/vouchers.json";
+
   constructor() {}
 
   ngOnInit() {}
+
+  usingJQueryAjax() {
+    $.ajax({
+      type: "GET",
+      url: this.url,
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+      success(data: any) {
+        console.log("Data received from JQuery: ", data);
+      },
+      error(err: any) {
+        console.log("Error received from JQuery: ", err);
+      }
+    });
+  }
+
+  usingjQueryWithPromise(){
+    $.ajax({
+      type: "GET",
+      url: this.url,
+      contentType: "application/json; charset=utf-8",
+      dataType: "json",
+    })
+    .then(data => console.log("Data received from JQuery: ", data))
+    .catch(err => console.log("Error received from JQuery: ", err));
+  }
 
   usingPromises() {
     function doAsyncTask(succeed: boolean): Promise<string> {
@@ -38,7 +67,7 @@ export class ServicesComponent implements OnInit {
   }
 
   usingFetch() {
-    fetch("./assets/vouchers.json").then(response => {
+    fetch(this.url).then(response => {
       console.log("Response received from fetch", response);
       console.log("Promise received from fetch", response.json());
     });
