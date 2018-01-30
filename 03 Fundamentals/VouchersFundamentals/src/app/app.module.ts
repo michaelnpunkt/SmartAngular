@@ -76,7 +76,7 @@ registerLocaleData(localeDe)
     AppRoutingModule
   ],
   providers: [VouchersService,
-  // {provide: LOCALE_ID, useValue: "de-DE"}
+  {provide: LOCALE_ID, useValue: "de-DE"}
   ],
   bootstrap: [AppComponent]
 })
