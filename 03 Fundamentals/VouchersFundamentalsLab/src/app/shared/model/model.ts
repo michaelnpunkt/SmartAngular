@@ -13,7 +13,9 @@ export class BalanceAccount {
     ID: number;
     Name: string;
     Expense: boolean;
-    VoucherDetails: VoucherDetail[];
+    Balance: number;
+    Created: Date;
+    //VoucherDetails: VoucherDetail[];
 }
 
 export class Voucher {
