@@ -18,6 +18,7 @@ export class AccountDetailComponent implements OnInit {
       this.account = data;
     });
 
+    //this.route.data
     //Accessing Query Params
     //var readonly = this.route.snapshot.queryParams['readonly'];
     //console.log(`Page is readonly: ${readonly}` )
