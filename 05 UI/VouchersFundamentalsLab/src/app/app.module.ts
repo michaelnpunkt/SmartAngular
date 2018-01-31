@@ -33,6 +33,8 @@ import { EmployeeComponent } from './demos/content-projection/employee/employee.
 import { NavbarComponent } from './shared/index';
 import { PersonEditComponent } from './demos/nested/person-edit/person-edit.component';
 
+import { MatTableModule, MatFormFieldModule, MatInputModule, MatSidenav, MatSidenavContainer, MatList, MatToolbar, MatSidenavModule, MatListModule, MatToolbarModule, MatIconModule, MatButtonModule, MatMenuModule, MatCardModule } from '@angular/material';
+
 import { registerLocaleData } from '@angular/common';
 import localeDe from '@angular/common/locales/de';
 import { AccountsService } from './accounts/account.service';
@@ -76,7 +78,10 @@ registerLocaleData(localeDe)
     HttpClientModule,
     BrowserModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [VouchersService,
   AccountsService,
