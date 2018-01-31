@@ -20,7 +20,7 @@ export class AccountsComponent implements OnInit {
   }
 
   showAccount(id: number){
-    this.router.navigate(['/account/' + id]);
+    this.router.navigate(['/accounts/' + id]);
   }
 
 }
