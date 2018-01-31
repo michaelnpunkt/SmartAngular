@@ -2,7 +2,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Voucher } from "../shared/index";
-import { environment } from 'environments/environment';
 
 @Injectable()
 export class VouchersService {
@@ -10,13 +9,13 @@ export class VouchersService {
 
     vouchers = null;
 
-    getVouchers() : Promise<any> {
-        return this.http.get(environment.vouchersAPI).toPromise();          
+    getVouchers() : Promise<Voucher[]> {
+        return this.http.get<Voucher[]>('/assets/vouchers.json').toPromise();          
     }
     
-    getVoucher(id: number) : Promise<any> {
+    getVoucher(id: number) : Promise<Voucher> {
         return new Promise<Voucher>((resolve, reject)=>{
-            this.http.get(environment.vouchersAPI).toPromise()
+            this.http.get('/assets/vouchers.json').toPromise()
             .then((data: Voucher[])=>{
                 var v = data.filter((item)=>{
                     return item.ID == id;

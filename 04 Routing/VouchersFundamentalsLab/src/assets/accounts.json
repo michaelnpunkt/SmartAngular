@@ -1,0 +1,51 @@
+[
+    {
+        "ID": 1,
+        "Name": "Unclassified",
+        "Expense": true,
+        "Balance": 0,
+        "Created": "2016-11-15T00:00:00"  
+    },
+    {
+        "ID": 2,
+        "Name": "Car Maintenance",
+        "Expense": true,
+        "Balance": 0,
+        "Created": "2016-11-15T00:00:00"
+    },
+    {
+        "ID": 3,
+        "Name": "Development",
+        "Expense": false,
+        "Balance": 1,
+        "Created": "2016-11-15T00:00:00"
+    },
+    {
+        "ID": 4,
+        "Name": "Consulting",
+        "Expense": false,
+        "Balance": 1,
+        "Created": "2016-11-15T00:00:00"
+    },
+    {
+        "ID": 5,
+        "Name": "Training",
+        "Expense": false,
+        "Balance": 1,
+        "Created": "2016-11-15T00:00:00"
+    },
+    {
+        "ID": 6,
+        "Name": "Software",
+        "Expense": true,
+        "Balance": 1,
+        "Created": "2016-11-15T00:00:00"
+    },
+    {
+        "ID": 7,
+        "Name": "Hosting & Internet",
+        "Expense": true,
+        "Balance": 0,
+        "Created": "2016-11-15T00:00:00"
+    }
+]
