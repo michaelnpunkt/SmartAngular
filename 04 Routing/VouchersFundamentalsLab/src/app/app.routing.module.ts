@@ -14,6 +14,7 @@ import { DemosComponent } from './demos/demos.component';
 import { VouchersListComponent } from './vouchers/vouchers-list.component';
 import { VoucherComponent } from './vouchers/voucher/voucher.component';
 import { AccountsComponent } from './accounts/accounts.component';
+import { AccountDetailComponent } from './accounts/account-detail/account-detail.component';
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule, ViewChild } from '@angular/core';
 
@@ -44,6 +45,10 @@ const appRoutes: Routes = [
     { path: 'accounts',
       component: AccountsComponent,
       data: { title: 'Accounts' }
+    },
+    { path: 'accounts/:id',
+      component: AccountDetailComponent,
+      data: { title: 'AccountDetails' }
     }
   ];
 

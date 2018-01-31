@@ -19,13 +19,13 @@ export class AccountDetailComponent implements OnInit {
     });
 
     //Accessing Query Params
-    var readonly = this.route.snapshot.queryParams['readonly'];
-    console.log(`Page is readonly: ${readonly}` )
+    //var readonly = this.route.snapshot.queryParams['readonly'];
+    //console.log(`Page is readonly: ${readonly}` )
 
     //Accessing Fragments
-    var section = this.route.snapshot.fragment;
-    if(section!=undefined) {
-      console.log(`Section to navigate to: ${section}` )
-    }
+    //var section = this.route.snapshot.fragment;
+    //if(section!=undefined) {
+    //  console.log(`Section to navigate to: ${section}` )
+    //}
   }
 }
