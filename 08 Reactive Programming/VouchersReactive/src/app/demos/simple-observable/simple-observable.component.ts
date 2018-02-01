@@ -119,6 +119,7 @@ export class SimpleObservableComponent implements OnInit {
     });
   }
 
+  //nur als beispiel
   getPromise(succeed: boolean) : Promise<number[]>{
     
     return new Promise<number[]>((resolve, reject)=>{
@@ -133,6 +134,7 @@ export class SimpleObservableComponent implements OnInit {
     });
   }
 
+  //nur als beispiel
   usePromiseToObs(){
 
     this.fName = "see console for output";
