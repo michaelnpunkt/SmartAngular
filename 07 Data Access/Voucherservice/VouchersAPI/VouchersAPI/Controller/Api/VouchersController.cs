@@ -35,6 +35,7 @@ namespace Vouchers.Api
             return id==0 ? new Voucher{Date = DateTime.Now} : ctx.Vouchers.Include(f=>f.Details).FirstOrDefault(v => v.ID == id);
         }
 
+        // http://localhost:PORT/api/vouchers    --> CREATE
         [HttpPost]
         public void Post([FromBody]Voucher value)
         {
@@ -49,6 +50,7 @@ namespace Vouchers.Api
             ctx.SaveChanges();
         }
 
+        // http://localhost:PORT/api/vouchers    --> UPDATE
         [HttpPut()]
         public void Put([FromBody]Voucher value) //Classic .NET Core WebApi pattern: public void Put(int id, [FromBody]Voucher value)
         {
