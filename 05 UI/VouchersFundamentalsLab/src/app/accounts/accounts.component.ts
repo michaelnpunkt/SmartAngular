@@ -16,7 +16,7 @@ export class AccountsComponent implements OnInit {
   constructor(private router: Router, private as: AccountsService) { }
 
   ngOnInit() {
-    this.as.getAccounts().then(data => this.accounts = data)
+    this.as.getAccounts().subscribe(data => this.accounts = data);
   }
 
   showAccount(id: number){

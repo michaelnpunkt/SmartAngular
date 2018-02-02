@@ -17,7 +17,7 @@ export class CustomPipesComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.vs.getVouchers().then(data => this.vouchers = data)
+    this.vs.getVouchers().subscribe(data => this.vouchers = data)
   }
 
   showVoucher(id: number){

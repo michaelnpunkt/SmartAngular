@@ -16,7 +16,7 @@ export class VouchersListComponent implements OnInit {
   constructor(private router: Router, private vs: VouchersService) {  }
 
   ngOnInit() {   
-    this.vs.getVouchers().then(data => this.vouchers = data)
+    this.vs.getVouchers().subscribe(data => this.vouchers = data)
   }
 
   showVoucher(id: number){

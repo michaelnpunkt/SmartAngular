@@ -14,9 +14,8 @@ export class AccountDetailComponent implements OnInit {
   constructor(private as: AccountsService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.as.getAccount(this.route.snapshot.params['id']).then(data => {
-      this.account = data;
-    });
+    this.as.getAccount(this.route.snapshot.params['id']);
+    
 
     //this.route.data
     //Accessing Query Params

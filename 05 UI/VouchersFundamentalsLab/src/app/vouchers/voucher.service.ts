@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Voucher } from "../shared/index";
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class VouchersService {
@@ -9,8 +10,8 @@ export class VouchersService {
 
     vouchers = null;
 
-    getVouchers() : Promise<Voucher[]> {
-        return this.http.get<Voucher[]>('/assets/vouchers.json').toPromise();          
+    getVouchers() : Observable<Voucher[]> {
+        return this.http.get<Voucher[]>('/assets/vouchers.json');         
     }
     
     getVoucher(id: number) : Promise<Voucher> {
